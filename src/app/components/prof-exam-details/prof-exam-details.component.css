@@ -1,0 +1,26 @@
+table {
+    width: 100%;
+  }
+  .mat-form-field {
+    font-size: 16px;
+    width: 100%;
+  }
+.student{
+  width: 50%;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 25%;
+}
+.class1{
+  background-color: rgb(250, 206, 228);
+  margin: 3px;
+}
+.example-card {
+  max-width: 100%;
+}
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  }
+
+  

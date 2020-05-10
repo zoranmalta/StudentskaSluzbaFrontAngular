@@ -1,0 +1,61 @@
+<div class="mat-elevation-z8">
+    <h4 style="text-align: center;">List of Exams</h4>
+    <div class="row">
+      <div class="col-4" >
+        <mat-form-field style="margin-left: 0.8em;">
+          <mat-label>Search</mat-label>
+          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
+        </mat-form-field>
+      </div>
+      <div class="col-8" style="float: right;"> 
+        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+      </div>
+      
+    </div>
+  
+    <table mat-table [dataSource]="dataSource" matSort >
+  
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+        <mat-cell *matCellDef="let exam"> {{exam.id}} </mat-cell>
+      </ng-container>
+
+       <!-- Period Column -->
+       <ng-container matColumnDef="period">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Period </mat-header-cell>
+        <mat-cell *matCellDef="let exam"> {{exam.period}} </mat-cell>
+      </ng-container>
+  
+      <!-- Course Name Column -->
+      <ng-container matColumnDef="courseName">
+        <mat-header-cell *matHeaderCellDef> Course Name </mat-header-cell>
+        <mat-cell *matCellDef="let exam"> {{exam.course.name}} </mat-cell>
+      </ng-container>
+  
+      <!-- Date Time Column -->
+      <ng-container matColumnDef="examStart">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Exam Start </mat-header-cell>
+        <mat-cell *matCellDef="let exam" [ngClass]="{'class1': checkTime(exam)}">
+             {{exam.examStart|date:'medium'}} </mat-cell>
+      </ng-container>
+
+       <!-- Archived Column -->
+      <!-- <ng-container matColumnDef="archived">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>Archived</mat-header-cell>
+        <mat-cell *matCellDef="let exam">{{exam.archived}}</mat-cell>
+      </ng-container> -->
+
+       <!-- Details Column -->
+       <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
+        <mat-cell *matCellDef="let exam">
+            <button type="button" mat-raised-button style="float: right;" (click)="details(exam)">Details</button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"  ></mat-row>
+    </table>
+</div>
+

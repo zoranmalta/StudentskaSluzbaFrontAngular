@@ -1,0 +1,138 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-5" >
+            <mat-card class="example-card">
+                <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>Course : {{exam.course.name}}</mat-card-title>
+                  <mat-card-subtitle></mat-card-subtitle>
+                </mat-card-header>
+                <mat-card-content>
+                  <p>
+                    Description :
+                  </p>
+                </mat-card-content>
+                <mat-card-actions>
+                  <button mat-raised-button (click)="archived()"  >Archivated</button>
+                </mat-card-actions>
+              </mat-card>
+        </div>
+        <div class="col-7" >
+           <div >
+            <mat-list  >
+              <mat-list-item *ngFor="let staff of staffList" >
+                 <span>{{ staff.academic.name+" "}} : </span>{{staff.lastName+" "}}{{staff.firstName}}
+              </mat-list-item>
+            </mat-list>
+           </div>
+        </div>
+  </div>
+    <div >
+        <h3 style="text-align: center;">lista studenata koji su prijavili ispit </h3>
+        <!-- <mat-selection-list >
+            <mat-list-option *ngFor="let student of students" [value]="student">
+              {{student.cardNumber+" "}}:{{" "+student.firstName+" "}}{{student.lastName}}
+            </mat-list-option>
+        </mat-selection-list> -->
+        <!-- <mat-list >
+            <mat-list-item [disabled]="examRegistration.deleted"  *ngFor="let examRegistration of examRegistrationList;let i = index"
+             (click)="onClick(examRegistration)" [ngClass]="{'class1':examRegistration.deleted }">
+              
+              <p matLine>
+                <span> {{examRegistration.student.cardNumber}} </span>
+                <span class="demo-2"> -- {{examRegistration.student.firstName}} </span>
+                <span> {{examRegistration.student.lastName+" , "}} </span>
+                <span class="demo-2">points -- {{examRegistration.points}} </span>
+                <span> {{" , mark --"+examRegistration.mark}} </span>
+                <span class="demo-2">  {{" , pass--"+examRegistration.pass}} </span>
+              </p>
+            </mat-list-item>
+          </mat-list> -->
+          <div class="mat-elevation-z8">
+          
+            <table mat-table [dataSource]="dataSource" >
+          
+              <!-- cardNumber Column -->
+              <ng-container matColumnDef="cardNumber">
+                <mat-header-cell *matHeaderCellDef > Card Number </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration"> {{examRegistration.student.cardNumber}} </mat-cell>
+              </ng-container>
+        
+               <!-- First Name Column -->
+               <ng-container matColumnDef="firstName">
+                <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration"> {{examRegistration.student.firstName}} </mat-cell>
+              </ng-container>
+          
+              <!-- Last Name Column -->
+              <ng-container matColumnDef="lastName">
+                <mat-header-cell *matHeaderCellDef> Last Name </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration"> {{examRegistration.student.lastName}} </mat-cell>
+              </ng-container>
+          
+              <!-- Points Column -->
+              <ng-container matColumnDef="points">
+                <mat-header-cell *matHeaderCellDef> Points </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration" >
+                     {{examRegistration.points}} </mat-cell>
+              </ng-container>
+
+              <!-- Mard Column -->
+              <ng-container matColumnDef="mark">
+                <mat-header-cell *matHeaderCellDef > Mark </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration" >
+                     {{examRegistration.mark}} </mat-cell>
+              </ng-container>
+
+              <!-- Pass Column -->
+              <ng-container matColumnDef="pass" >
+                <mat-header-cell *matHeaderCellDef > Pass </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration" [ngClass]="{'class1': examRegistration.deleted}" >
+                     {{examRegistration.pass}} </mat-cell>
+              </ng-container>
+        
+               <!-- Details Column -->
+               <ng-container matColumnDef="details">
+                <mat-header-cell *matHeaderCellDef >  </mat-header-cell>
+                <mat-cell *matCellDef="let examRegistration" >
+                    <button type="button" mat-raised-button style="float: right;"
+                     [disabled]="!canAddPoints" (click)="addMark(examRegistration)">Add Points</button>
+                </mat-cell>
+              </ng-container>
+          
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"  ></mat-row>
+            </table>
+        </div>
+    </div>
+    <div *ngIf="showInsertStudentMark" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
+        <h3 style="text-align: center;">Insert Student's Points</h3>
+      <mat-card style="margin: 1.5em;">
+        <mat-card-content style="background-color: rgb(233, 233, 233);">
+          <form  [formGroup]="examRegistrationForm" (ngSubmit)="onSubmitStudent(examRegistrationForm.value)" novalidate>
+      
+            <mat-label class="student">
+                <span> {{selectedStudent.cardNumber}} </span>
+                <span class="demo-2"> -- {{selectedStudent.firstName}} </span>
+                <span> {{selectedStudent.lastName}} </span>
+            </mat-label>
+      
+            <mat-form-field class="student" appearance="standard">
+              <mat-label >Points</mat-label>
+              <input formControlName="points" matInput placeholder="points">
+              <mat-error *ngIf="examRegistrationForm.get('points').invalid&&
+              examRegistrationForm.get('points').touched">
+                Points are <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+      
+            <div class="student" style="padding-bottom: 2em;">
+              <button [disabled]="!examRegistrationForm.valid" type="submit" mat-raised-button style="float: left;">Insert Student</button>
+              <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
+              <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
+            </div>
+          </form>
+        </mat-card-content>
+      </mat-card>
+    </div>
+</div>
