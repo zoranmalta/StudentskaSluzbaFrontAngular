@@ -29,6 +29,11 @@ export class CourseService {
   getCourses():Observable<Course[]>{
     return this.http.get<Course[]>(this.getCoursesUrl);
   }
+
+  getCoursesByStudentId(studentId:number):Observable<Course[]>{
+    return this.http.get<Course[]>(`${this.getCoursesUrl}/${studentId}`)
+  }
+
   insertCourse(course:Course):Observable<Course>{
     var headers: HttpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
     console.log("Objekat poslat na server za insert : "+course )

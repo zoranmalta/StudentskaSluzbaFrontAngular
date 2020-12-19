@@ -16,6 +16,7 @@ import { ProfExamComponent } from './components/prof-exam/prof-exam.component';
 import { ProfExamDetailsComponent } from './components/prof-exam-details/prof-exam-details.component';
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { ShowCoursesComponent } from './components/show-courses/show-courses.component';
 
 const routes: Routes = [
   { path : "home" , component : HomePageComponent},
@@ -29,6 +30,7 @@ const routes: Routes = [
   { path: 'sidemenu' , outlet : 'sidemenu', component : MainMenuComponent},
   { path: 'anything' , outlet : 'sidemenu', component : MainMenuComponent},
 
+  { path : "showcourses" , component : ShowCoursesComponent },
   { path : "payment" , component : PaymentComponent },
   { path : "passedexams" , component : PassedExamsComponent },
   { path : "examregistration" , component : ExamRegistrationComponent },

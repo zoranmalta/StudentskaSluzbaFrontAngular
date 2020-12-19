@@ -156,7 +156,7 @@ export class ProfExamDetailsComponent implements OnInit {
   setStaffFromEngagements(){
     this.staffList=[]
     this.engagements.forEach(element => {
-      if(true){
+      if(element.deleted==false&&element.staff.deleted==false){
         this.staffList.push(element.staff)
       }
    });

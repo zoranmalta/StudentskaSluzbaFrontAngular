@@ -29,6 +29,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatGridListModule } from '@angular/material/grid-list';
 import { CourseDetailsComponent } from './components/course-details/course-details.component'
 import { MatSelectModule } from '@angular/material/select';
 import { ExamComponent } from './components/exam/exam.component'
@@ -39,6 +40,8 @@ import { ProfExamComponent } from './components/prof-exam/prof-exam.component';
 import { ProfExamDetailsComponent } from './components/prof-exam-details/prof-exam-details.component';
 import { PassedExamsComponent } from './components/passed-exams/passed-exams.component';
 import { PaymentComponent } from './components/payment/payment.component';
+import { QuestionsSetComponent } from './components/questions-set/questions-set.component';
+import { ShowCoursesComponent } from './components/show-courses/show-courses.component';
 
 
 @NgModule({
@@ -61,6 +64,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     ProfExamDetailsComponent,
     PassedExamsComponent,
     PaymentComponent,
+    QuestionsSetComponent,
+    ShowCoursesComponent,
   ],
   entryComponents: [DialogYesNoComponent],
   imports: [
@@ -87,7 +92,8 @@ import { PaymentComponent } from './components/payment/payment.component';
     MatSelectModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatGridListModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },AdminGuard

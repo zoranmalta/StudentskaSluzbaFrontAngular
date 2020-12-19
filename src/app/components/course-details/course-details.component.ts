@@ -210,11 +210,13 @@ export class CourseDetailsComponent implements OnInit {
   filterListForDeleteStaff(){
     this.engagementsToDelete=[]
     this.engagements.forEach(engagement => {
-      this.selectedStaffOptions.forEach(staff => {
-        if(engagement.staff.id==staff.id){
-          this.engagementsToDelete.push(engagement)
-        }
-      });
+      if(!engagement.deleted){
+        this.selectedStaffOptions.forEach(staff => {
+          if(engagement.staff.id==staff.id&&!staff.deleted){
+            this.engagementsToDelete.push(engagement)
+          }
+        });
+      }
     });
   }
 
