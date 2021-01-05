@@ -30,6 +30,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox'
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule }  from '@angular/material/icon';
+
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { CourseDetailsComponent } from './components/course-details/course-details.component'
 import { MatSelectModule } from '@angular/material/select';
 import { ExamComponent } from './components/exam/exam.component'
@@ -42,6 +45,14 @@ import { PassedExamsComponent } from './components/passed-exams/passed-exams.com
 import { PaymentComponent } from './components/payment/payment.component';
 import { QuestionsSetComponent } from './components/questions-set/questions-set.component';
 import { ShowCoursesComponent } from './components/show-courses/show-courses.component';
+import { ExamTestRegistrationComponent } from './components/exam-test-registration/exam-test-registration.component';
+import {
+  InjectableRxStompConfig,
+  RxStompService,
+  rxStompServiceFactory,
+} from '@stomp/ng2-stompjs';
+
+import { myRxStompConfig } from './my-rx-stomp.config';
 
 
 @NgModule({
@@ -66,6 +77,7 @@ import { ShowCoursesComponent } from './components/show-courses/show-courses.com
     PaymentComponent,
     QuestionsSetComponent,
     ShowCoursesComponent,
+    ExamTestRegistrationComponent,
   ],
   entryComponents: [DialogYesNoComponent],
   imports: [
@@ -93,10 +105,21 @@ import { ShowCoursesComponent } from './components/show-courses/show-courses.com
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
     MatCheckboxModule,
-    MatGridListModule
+    MatIconModule,
+    MatGridListModule,
+    ScrollingModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },AdminGuard
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true },AdminGuard,
+    {
+      provide: InjectableRxStompConfig,
+      useValue: myRxStompConfig,
+    },
+    {
+      provide: RxStompService,
+      useFactory: rxStompServiceFactory,
+      deps: [InjectableRxStompConfig],
+    },
   ],
   bootstrap: [AppComponent]
 })

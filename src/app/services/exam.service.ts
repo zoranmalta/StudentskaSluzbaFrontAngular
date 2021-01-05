@@ -18,6 +18,7 @@ export class ExamService {
   private readonly insertExamUrl=`${environment.apiBaseUri}/exams/insert`
   private readonly updateExamUrl=`${environment.apiBaseUri}/exams/update`
   private readonly archiveExamUrl=`${environment.apiBaseUri}/exams/archive`
+  private readonly getExamsByStudentIdNotArchivatedURL=`${environment.apiBaseUri}/exams/notarchivated`
 
   private readonly insertExamRegistrationUrl=`${environment.apiBaseUri}/examregistration/insert`
   private readonly deleteExamRegistrationUrl=`${environment.apiBaseUri}/examregistration/delete`
@@ -29,6 +30,10 @@ export class ExamService {
 
   getExamRegistrationsForExam(examId:number):Observable<ExamRegistration[]>{
     return this.http.get<ExamRegistration[]>(`${this.getExamRegistrationForExamUrl}/${examId}`)
+  }
+
+  getExamsByStudentIdNotArchivated(studentId:number):Observable<Exam[]>{
+    return this.http.get<Exam[]>(`${this.getExamsByStudentIdNotArchivatedURL}/${studentId}`)
   }
 
   getFinishedExamRegistrations(studentId:number):Observable<ExamRegistration[]>{

@@ -4,31 +4,39 @@
             <mat-card class="example-card">
                 <mat-card-header>
                   <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Course : {{exam.course.name}}</mat-card-title>
-                  <mat-card-subtitle></mat-card-subtitle>
+                  <mat-card-title>Predmet : {{exam.course.name}}</mat-card-title>
+                  <mat-card-subtitle>Ispitni rok : {{exam.period}} </mat-card-subtitle>
                 </mat-card-header>
                 <mat-card-content>
-                  <p>
-                    Description :
-                  </p>
+                  <div >
+                    <mat-list  >
+                      <mat-list-item *ngFor="let staff of staffList" >
+                         <span>{{ staff.academic.name+" "}} : </span>{{staff.lastName+" "}}{{staff.firstName}}
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                 
                 </mat-card-content>
                 <mat-card-actions>
-                  <button mat-raised-button (click)="archived()"  >Archivated</button>
+                  <button [disabled]="!canArhivate" mat-raised-button (click)="archived()"  >Arhivirati ispit</button>
+                  <button [disabled]="!canSetQuestions" mat-raised-button (click)="details()"  >Dodati zadatak</button>
                 </mat-card-actions>
               </mat-card>
         </div>
         <div class="col-7" >
-           <div >
+          <h3>Lista testova za ispit</h3>
+          <div >
             <mat-list  >
-              <mat-list-item *ngFor="let staff of staffList" >
-                 <span>{{ staff.academic.name+" "}} : </span>{{staff.lastName+" "}}{{staff.firstName}}
+              <mat-list-item *ngFor="let examTest of examTestList" >
+                <div mat-line><span>{{"Tema : "+ examTest.tema+" Pocetak : "}}</span>{{examTest.testStart | date:'medium'}}</div>
+                <button mat-raised-button (click)="showTest(examTest)" style="background-color: rgb(241, 150, 150);" > Prikazi test </button>
               </mat-list-item>
             </mat-list>
            </div>
         </div>
   </div>
     <div >
-        <h3 style="text-align: center;">lista studenata koji su prijavili ispit </h3>
+        <h3 >Lista studenata koji su prijavili ispit </h3>
         <!-- <mat-selection-list >
             <mat-list-option *ngFor="let student of students" [value]="student">
               {{student.cardNumber+" "}}:{{" "+student.firstName+" "}}{{student.lastName}}
@@ -106,10 +114,10 @@
         </div>
     </div>
     <div *ngIf="showInsertStudentMark" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-        <h3 style="text-align: center;">Insert Student's Points</h3>
+        <h3 >Upisati poene studenta</h3>
       <mat-card style="margin: 1.5em;">
         <mat-card-content style="background-color: rgb(233, 233, 233);">
-          <form  [formGroup]="examRegistrationForm" (ngSubmit)="onSubmitStudent(examRegistrationForm.value)" novalidate>
+          <form  [formGroup]="examRegistrationForm" (ngSubmit)="onSubmitPoints(examRegistrationForm.value)" novalidate>
       
             <mat-label class="student">
                 <span> {{selectedStudent.cardNumber}} </span>
@@ -127,7 +135,7 @@
             </mat-form-field>
       
             <div class="student" style="padding-bottom: 2em;">
-              <button [disabled]="!examRegistrationForm.valid" type="submit" mat-raised-button style="float: left;">Insert Student</button>
+              <button [disabled]="!examRegistrationForm.valid" type="submit" mat-raised-button style="float: left;">Ucitan poene</button>
               <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
               <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
             </div>

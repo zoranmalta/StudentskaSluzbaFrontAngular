@@ -47,8 +47,8 @@ export class StudentComponent implements OnInit {
 
   paymentForm=this.formBuilder.group({
     id:[""],
-    onePaymentChange:["",[Validators.required,Validators.max(1000000),Validators.min(0),Validators.pattern('[0-9]*')]],
-    reason:["Payment"]
+    onePaymentChange:["",[Validators.required,Validators.max(1000000),Validators.min(0),Validators.pattern('[0-9]*')]]
+    
   })
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
@@ -80,7 +80,7 @@ export class StudentComponent implements OnInit {
     let payment=new Payment()
     payment.onePaymentChange=paymentForm.onePaymentChange
     payment.student=this.selectedStudent
-    payment.reason=paymentForm.reason
+    payment.reason="Uplata sredstava"
     this.studentService.insertPayment(payment).subscribe(
      data=>{
        this.students.forEach(

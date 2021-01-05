@@ -62,44 +62,44 @@
 </div>
 
 <div *ngIf="showInsertExam" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-    <h3 style="text-align: center;">Insert/Update Exam</h3>
+    <h3 style="text-align: center;">Ucitaj ispit</h3>
   <mat-card style="margin: 1.5em;">
     <mat-card-content style="background-color: rgb(233, 233, 233);">
       <form  [formGroup]="examForm" (ngSubmit)="onSubmitExam(examForm.value)" novalidate>
   
             <mat-form-field class="exam" appearance="standard">
-                <mat-label>Exam Period</mat-label>
+                <mat-label>Ispitni rok</mat-label>
                 <mat-select formControlName="period" >
-                  <mat-option value="JANUARY">January</mat-option>
-                  <mat-option value="MARCH">March</mat-option>
+                  <mat-option value="JANUARY">Januar</mat-option>
+                  <mat-option value="MARCH">Mart</mat-option>
                   <mat-option value="JUN">Jun</mat-option>
-                  <mat-option value="SEPTEMBER">September</mat-option>
+                  <mat-option value="SEPTEMBER">Septembar</mat-option>
                 </mat-select>
                 <mat-error *ngIf="examForm.get('period').invalid &&
                 examForm.get('period').touched">
-                Period is <strong>required</strong>
+               Ispitni rok je <strong>obavezan</strong>
               </mat-error>
               </mat-form-field>
 
               <mat-form-field class="exam" appearance="standard">
-                <mat-label>Course Name</mat-label>
+                <mat-label>Predmet</mat-label>
                 <mat-select formControlName="courseId" >
                     <mat-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</mat-option>
                 </mat-select>
                 <mat-error *ngIf="examForm.get('courseId').invalid &&
                 examForm.get('courseId').touched">
-                Course is <strong>required</strong>
+                Predmet je <strong>obavezan</strong>
               </mat-error>
               </mat-form-field>
 
               <mat-form-field class="exam" appearance="standard">
-                <mat-label>Pick Exam Start Date and Time</mat-label>
-                <input formControlName="examStart" matInput placeholder="exam start"
+                <mat-label>Izaberi datum i vreme ispita</mat-label>
+                <input formControlName="examStart" matInput placeholder="pocetak ispita" autocomplete="off"
                                          [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
                                          <owl-date-time #dt></owl-date-time>
                 <mat-error *ngIf="examForm.get('examStart').invalid&&
                 examForm.get('examStart').touched">
-                  Exam Start is <strong>required</strong>
+                  Pocetak ispita je<strong>obavezan</strong>
                 </mat-error>
               </mat-form-field>
   
@@ -110,7 +110,7 @@
           <button type="button" mat-raised-button style="float: right;margin-right: 8px;" (click)="onCancel()">Cancel</button>
         </div>
       </form>
-      {{examForm.value | json}}
+      <!-- {{examForm.value | json}} -->
     </mat-card-content>
   </mat-card>
   </div>

@@ -39,6 +39,11 @@
       </a>
     </li>
     <li *ngIf="isUserRole && !isAdminRole">
+      <a routerLink="/examtestregistrationcomponent">
+        <span class="badge">*</span> Prijavljeni ispiti
+      </a>
+    </li>
+    <li *ngIf="isUserRole && !isAdminRole">
       <a routerLink="/passedexams">
         <span class="badge">*</span> Polozeni Ispiti
       </a>

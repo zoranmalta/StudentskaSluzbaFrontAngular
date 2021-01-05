@@ -1,4 +1,5 @@
 import { Course } from './course';
+import { ExamTest } from './examTest';
 
 export class Exam{
     id:number;
@@ -6,4 +7,5 @@ export class Exam{
     period:string;
     examStart:Date;
     archived:boolean
+    examTestList:ExamTest[]=[]
 }

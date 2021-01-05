@@ -13,6 +13,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogYesNoComponent } from 'src/app/dialogs/dialog-yes-no/dialog-yes-no.component';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { ExamTest } from 'src/app/model/examTest';
+import { ExamTestsAndQuestionsService } from 'src/app/services/exam-tests-and-questions.service';
 
 
 @Component({
@@ -25,12 +27,15 @@ export class ProfExamDetailsComponent implements OnInit {
   exam:Exam
   students:Student[]
   staffList:Staff[]
+  examTestList:ExamTest[]=[]
   engagements:Engagement[]
   examRegistrationList:ExamRegistration[]=[]
   showInsertStudentMark:boolean=false
   selectedStudent:Student
 
   canAddPoints:boolean=false;
+  canArhivate:boolean=false;
+  canSetQuestions:boolean=false;
 
   dataSource:any;
   displayedColumns: string[] = ['cardNumber', 'firstName', 'lastName','points','mark','pass', 'details'];
@@ -45,16 +50,21 @@ export class ProfExamDetailsComponent implements OnInit {
 
   constructor(private examService:ExamService,private courseService:CourseService,
     private formBuilder:FormBuilder,private snackBar:MatSnackBar,private dialog:MatDialog
-    ,private router:Router) { }
+    ,private router:Router,private examTestService:ExamTestsAndQuestionsService) { }
 
   ngOnInit(): void {
      //primamo ceo objekat Exam preko brauzera history.state.data(ime objekta data)
    this.exam=window.history.state.data
+   if(this.exam===undefined||this.exam===null){
+     this.router.navigate(["/profexam"])
+   }
    this.examService.getExamRegistrationsForExam(this.exam.id).subscribe(
      data=>{
        this.examRegistrationList=data
        this.dataSource=new MatTableDataSource(this.examRegistrationList);
        this.setStudentsFromRegistration()
+       this.checkArhivateCondition()
+      
      },
      error=>console.log("Greska u primanju registrations sa servera")
    )
@@ -64,6 +74,21 @@ export class ProfExamDetailsComponent implements OnInit {
      this.setStaffFromEngagements()
     })
     this.canAddPoints=this.checkTime(this.exam)
+    this.canSetQuestions=!this.checkTime(this.exam)
+    this.examTestService.getExamTestsByExamId(this.exam.id).subscribe(
+      data=>this.examTestList=data,
+      err=>console.log("greska u preuzimanju exam testova sa servera")
+    )
+  }
+
+  details(){
+    console.log("exam poslat drugoj komponenti"+this.exam.examStart)
+    //prosledjujemo objekat preko routera
+    this.router.navigate(["/questionsset"],{state:{data:this.exam}})
+  }
+
+  showTest(examTest:ExamTest){
+
   }
 
   archived(){
@@ -109,7 +134,7 @@ export class ProfExamDetailsComponent implements OnInit {
     return new Date().valueOf() > new Date(exam.examStart).valueOf();
   }
 
-  onSubmitStudent(examRegistrationForm){
+  onSubmitPoints(examRegistrationForm){
     let examRegistrationConfirm=new ExamRegistration()
     examRegistrationConfirm.id=examRegistrationForm.id
     examRegistrationConfirm.points=examRegistrationForm.points
@@ -124,8 +149,9 @@ export class ProfExamDetailsComponent implements OnInit {
       })
       this.dataSource.data=this.examRegistrationList
       this.table.renderRows();
+      this.checkArhivateCondition()
     },
-      error=>console.log("greska pri ocanjivanju studenta")
+      error=>console.log("greska pri ocanjivanju poena")
     )
 
     this.onCancel()
@@ -166,6 +192,26 @@ export class ProfExamDetailsComponent implements OnInit {
     this.showInsertStudentMark=true
     this.examRegistrationForm.patchValue(examRegistration)
   }
+
+  checkArhivateCondition(){
+    if(this.examRegistrationList.length===0&&!this.checkTime(this.exam)){
+      this.canArhivate=false
+      return
+    }
+    if(this.examRegistrationList.length===0 && this.checkTime(this.exam)){
+      this.canArhivate=true
+      return
+    }
+    let checkdeleted:boolean=false
+    this.examRegistrationList.forEach(element=>{
+      if(element.deleted==false){
+        checkdeleted=true
+      }});
+    if(!checkdeleted){
+      this.canArhivate=true
+    }
+  }
+
   onClear(){
     this.examRegistrationForm.reset()
   }

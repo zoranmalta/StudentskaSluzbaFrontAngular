@@ -1,0 +1,43 @@
+
+mat-form-field {
+  font-size: 16px;
+  width: 100%;
+  border-radius: 4px;
+  margin-top: 2px;
+  color: darkblue;
+}
+.student{
+  background-color: lightblue;
+  width: 90%;
+  vertical-align: middle;
+  text-align: center;
+  margin-left: 5%;
+}
+mat-list-item{
+  border-radius: 6px;
+  background-color: lightblue;
+  margin-top: 2px;
+}
+.buttonSubmit{
+  float: left;
+  background-color: lightgreen;
+}
+mat-card-content{
+  background-color: darkblue;
+  border-radius: 4px;
+}
+.action{
+  background-color: lightblue;
+  vertical-align: middle;
+  text-align: center;
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 2px;
+  padding-bottom: 3em;
+  padding-top: 4px;
+  border-radius: 4px;
+}
+mat-list{
+  max-height: 315px;
+  overflow: auto;
+}

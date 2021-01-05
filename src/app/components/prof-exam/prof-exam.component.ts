@@ -64,7 +64,7 @@ export class ProfExamComponent implements OnInit {
   }
 
   details(exam:Exam){
-    console.log("course poslat drugoj komponenti"+exam.examStart)
+    console.log("exam poslat drugoj komponenti"+exam.examStart)
     //prosledjujemo objekat preko routera
     this.router.navigate(["/profexamdetails"],{state:{data:exam}})
   }
