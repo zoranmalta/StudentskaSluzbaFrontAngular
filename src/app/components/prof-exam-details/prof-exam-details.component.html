@@ -19,7 +19,7 @@
                 </mat-card-content>
                 <mat-card-actions>
                   <button [disabled]="!canArhivate" mat-raised-button (click)="archived()"  >Arhivirati ispit</button>
-                  <button [disabled]="!canSetQuestions" mat-raised-button (click)="details()"  >Dodati zadatak</button>
+                  <button [disabled]="!canSetQuestions" mat-raised-button (click)="dodajZadatak()"  >Dodati zadatak</button>
                 </mat-card-actions>
               </mat-card>
         </div>
@@ -37,29 +37,9 @@
   </div>
     <div >
         <h3 >Lista studenata koji su prijavili ispit </h3>
-        <!-- <mat-selection-list >
-            <mat-list-option *ngFor="let student of students" [value]="student">
-              {{student.cardNumber+" "}}:{{" "+student.firstName+" "}}{{student.lastName}}
-            </mat-list-option>
-        </mat-selection-list> -->
-        <!-- <mat-list >
-            <mat-list-item [disabled]="examRegistration.deleted"  *ngFor="let examRegistration of examRegistrationList;let i = index"
-             (click)="onClick(examRegistration)" [ngClass]="{'class1':examRegistration.deleted }">
-              
-              <p matLine>
-                <span> {{examRegistration.student.cardNumber}} </span>
-                <span class="demo-2"> -- {{examRegistration.student.firstName}} </span>
-                <span> {{examRegistration.student.lastName+" , "}} </span>
-                <span class="demo-2">points -- {{examRegistration.points}} </span>
-                <span> {{" , mark --"+examRegistration.mark}} </span>
-                <span class="demo-2">  {{" , pass--"+examRegistration.pass}} </span>
-              </p>
-            </mat-list-item>
-          </mat-list> -->
+       
           <div class="mat-elevation-z8">
-          
             <table mat-table [dataSource]="dataSource" >
-          
               <!-- cardNumber Column -->
               <ng-container matColumnDef="cardNumber">
                 <mat-header-cell *matHeaderCellDef > Card Number </mat-header-cell>

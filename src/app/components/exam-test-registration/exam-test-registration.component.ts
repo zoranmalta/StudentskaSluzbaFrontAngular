@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Router } from '@angular/router';
 import { RxStompService } from '@stomp/ng2-stompjs';
 import { Message } from '@stomp/stompjs'
 import { from, Observable, Subscription } from 'rxjs';
@@ -25,7 +27,8 @@ export class ExamTestRegistrationComponent implements OnInit {
   private topicSubscription: Subscription;
 
   constructor(private loginService:LoginService,private examTestService:ExamTestsAndQuestionsService,
-    private studentService:StudentService,private examService:ExamService,private rxStompService: RxStompService ) { }
+    private studentService:StudentService,private examService:ExamService,private rxStompService:RxStompService
+    ,private router:Router ,private snackBar:MatSnackBar) { }
 
   ngOnInit(): void {
     let token = this.loginService.getToken();
@@ -51,7 +54,6 @@ export class ExamTestRegistrationComponent implements OnInit {
             this.infinite=from([data]);
         }
       )
-     
       console.log("stiglo preko websocketa: ")
     },
     err=>console.log("greska u websocketu")
@@ -68,7 +70,15 @@ export class ExamTestRegistrationComponent implements OnInit {
     this.rxStompService.publish({destination: '/app/chat', body: message});
   }
 
-  pocniTest(examTest){}
+  pocniTest(examTest:ExamTest){
+    this.examTestService.getWorkTestByExamTestIdAndStudent(examTest.id,this.student.id).subscribe(
+      data=>{
+          this.snackBar.open("Test ste već uradili!","",{duration:2000})
+      },err=>{ 
+        //prosledjujemo objekat preko routera
+        this.router.navigate(["/examtest"],{state:{data:examTest,user:this.student}})
+      })
+  }
 
   trackByIdx(i) {
     return i;

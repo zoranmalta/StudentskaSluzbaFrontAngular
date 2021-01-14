@@ -19,6 +19,9 @@ import { PaymentComponent } from './components/payment/payment.component';
 import { ShowCoursesComponent } from './components/show-courses/show-courses.component';
 import { QuestionsSetComponent } from './components/questions-set/questions-set.component';
 import { ExamTestRegistrationComponent } from './components/exam-test-registration/exam-test-registration.component';
+import { ExamTestComponent } from './components/exam-test/exam-test.component';
+import { ProfTestDetailsComponent } from './components/prof-test-details/prof-test-details.component';
+import { TestStudentComponent } from './components/test-student/test-student.component';
 
 const routes: Routes = [
   { path : "home" , component : HomePageComponent},
@@ -34,13 +37,16 @@ const routes: Routes = [
 
   { path : "showcourses" , component : ShowCoursesComponent },
   { path : "payment" , component : PaymentComponent },
+  { path : "examtest" , component : ExamTestComponent },
   { path : "passedexams" , component : PassedExamsComponent },
   { path : "examregistration" , component : ExamRegistrationComponent },
   { path : "examtestregistrationcomponent" , component : ExamTestRegistrationComponent},
 
   { path : "profexamdetails" , component : ProfExamDetailsComponent },
+  { path : "proftestdetails" , component : ProfTestDetailsComponent },
   { path : "profexam" , component : ProfExamComponent },
   { path : "questionsset" , component: QuestionsSetComponent},
+  { path : "teststudent" , component : TestStudentComponent },
 
   { path : "**" , component : PageNotFoundComponent}
 ];

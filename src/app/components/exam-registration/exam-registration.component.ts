@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTable, MatTableDataSource } from '@angular/material/table';
@@ -10,8 +10,6 @@ import { LoginService } from 'src/app/services/login.service';
 import { StudentService } from 'src/app/services/student.service';
 import { Student } from 'src/app/model/student';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { element } from 'protractor';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { DialogYesNoComponent } from 'src/app/dialogs/dialog-yes-no/dialog-yes-no.component';
@@ -34,7 +32,6 @@ export class ExamRegistrationComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   @ViewChild(MatTable, {static:true}) table: MatTable<any>;
-  //@ViewChildren(MatCheckbox) matCheckbox: QueryList<any>;
 
   examForm=this.formBuilder.group({
     id:[''],

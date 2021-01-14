@@ -5,7 +5,7 @@ export class ExamTest{
     id:number;
     exam:Exam;
     trajanje:number;
-    bodovi:number;
+    bodovi:number=0;
     tema:string;
     testStart:Date;
     deleted:boolean;

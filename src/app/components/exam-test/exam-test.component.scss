@@ -1,0 +1,126 @@
+.example-card {
+    max-width: 100%;
+  }
+  
+  .example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+  }
+
+  .time{
+    font-size: 35px;
+    font-weight: 500;
+    margin-top: 10px;
+    justify-content: center;
+  }
+
+  .card svg.material-icons path {
+    fill: #888;
+  }
+  
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 3px;
+    
+  }
+  
+  .card {
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    height: 55px;
+    width: 200px;
+    /* margin: 0 8px 16px; */
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+    font-size: larger;
+    
+  }
+  
+  .card-container .card:not(:last-child) {
+    margin-right: 0;
+  }
+  
+  .card.card-small {
+    height: 16px;
+    width: 168px;
+  }
+  
+  .card-container .card:not(.highlight-card) {
+    cursor: pointer;
+  }
+  
+  .card-container .card:not(.highlight-card):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 17px rgba(black, 0.35);
+  }
+  
+  .card-container .card:not(.highlight-card):hover .material-icons path {
+    fill: rgb(105, 103, 103);
+  }
+  
+  .card.highlight-card {
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    border: none;
+    width: auto;
+    min-width: 30%;
+    position: relative;
+  }
+  
+  .card.card.highlight-card span {
+    margin-left: 60px;
+  }
+
+  .blue{
+    background-color: #badbfc;
+  }
+  .red{
+    background-color: rgb(247, 139, 153);
+  }
+  .green{
+    background-color: rgb(152, 248, 152);
+  }
+ mat-form-field {
+  background-color: #fafafa;
+  border-radius: 4px;
+ }
+  .disableDiv{
+    pointer-events:none;
+}
+
+  cdk-virtual-scroll-viewport {
+    height: 96vh;
+    width: 100%;
+    margin : 0 auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    list-style: none;
+  
+    mat-card {
+      height: 220px;
+      margin: 6px;
+      background: whitesmoke;
+      
+    }
+  
+    // Bonus points
+    &::-webkit-scrollbar {
+      width: 1em;
+    }
+  
+    &::-webkit-scrollbar-thumb {
+      background-color:  #1976d2;
+    }
+  }
+  

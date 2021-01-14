@@ -81,14 +81,14 @@ export class ProfExamDetailsComponent implements OnInit {
     )
   }
 
-  details(){
+  dodajZadatak(){
     console.log("exam poslat drugoj komponenti"+this.exam.examStart)
     //prosledjujemo objekat preko routera
     this.router.navigate(["/questionsset"],{state:{data:this.exam}})
   }
 
   showTest(examTest:ExamTest){
-
+    this.router.navigate(["/proftestdetails"],{state:{data:examTest}})
   }
 
   archived(){

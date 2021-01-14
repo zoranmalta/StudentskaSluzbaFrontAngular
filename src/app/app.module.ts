@@ -53,6 +53,10 @@ import {
 } from '@stomp/ng2-stompjs';
 
 import { myRxStompConfig } from './my-rx-stomp.config';
+import { ExamTestComponent } from './components/exam-test/exam-test.component';
+import { DecodeHtmlString } from './pipe/decodeHtmlString';
+import { ProfTestDetailsComponent } from './components/prof-test-details/prof-test-details.component';
+import { TestStudentComponent } from './components/test-student/test-student.component';
 
 
 @NgModule({
@@ -78,6 +82,10 @@ import { myRxStompConfig } from './my-rx-stomp.config';
     QuestionsSetComponent,
     ShowCoursesComponent,
     ExamTestRegistrationComponent,
+    ExamTestComponent,
+    DecodeHtmlString,
+    ProfTestDetailsComponent,
+    TestStudentComponent 
   ],
   entryComponents: [DialogYesNoComponent],
   imports: [

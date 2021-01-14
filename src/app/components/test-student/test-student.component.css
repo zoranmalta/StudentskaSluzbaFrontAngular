@@ -1,0 +1,27 @@
+.blue{
+    color:blue;
+    font-size: 18px;
+    font-weight: 400;
+    
+}
+.red{
+    color: red;
+    font-size: 18px;
+    font-weight: 400;
+}
+.green{
+    color: green;
+    font-size: 18px;
+    font-weight: 400;
+}
+h2{
+    text-align: center;
+}
+button{
+    background-color: rgb(241, 150, 150);
+    margin-left: auto;
+}
+.time{
+    max-height: 90vh;
+    overflow: auto;
+}

@@ -1,6 +1,5 @@
-import { CdkVirtualScrollViewport } from '@angular/cdk/scrolling';
 import {  Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -21,7 +20,8 @@ export class QuestionsSetComponent implements OnInit {
   exam:Exam
   examDate:Date
   questionList:Question[]=[]
-  examTest:ExamTest
+  examTest:ExamTest=new ExamTest()
+  
 
   pitanjeForm=this.formBuilder.group({
     pitanje:["",Validators.required],
@@ -30,6 +30,7 @@ export class QuestionsSetComponent implements OnInit {
     odgovor3:["",Validators.required],
     odgovor4:["",Validators.required],
     opis:["",Validators.required],
+    bodovi:[,[Validators.required,Validators.max(100),Validators.min(0),Validators.pattern('[0-9]*')]],
   })
 
   examTestForm=this.formBuilder.group({
@@ -37,7 +38,7 @@ export class QuestionsSetComponent implements OnInit {
     tema:["",Validators.required],
     testStart:["",Validators.required],
     trajanje:["",[Validators.required,Validators.max(120),Validators.min(0),Validators.pattern('[0-9]*')]],
-    bodovi:["",[Validators.required,Validators.max(100),Validators.min(0),Validators.pattern('[0-9]*')]],
+    
   })
 
   constructor(private formBuilder:FormBuilder,private snackBar:MatSnackBar,private router:Router,
@@ -49,14 +50,16 @@ export class QuestionsSetComponent implements OnInit {
    this.examDate=this.exam.examStart
   }
 
-  onSubmitPitanje(value:any){
+  onSubmitPitanje(pitanjeForm:FormGroup){
+    
     let question=new Question();
-    question.pitanje=value.pitanje
-    question.odgovor1=value.odgovor1
-    question.odgovor2=value.odgovor2
-    question.odgovor3=value.odgovor3
-    question.odgovor4=value.odgovor4
-    question.opis=value.opis
+    question.pitanje=pitanjeForm.get('pitanje').value
+    question.odgovor1=pitanjeForm.value.odgovor1
+    question.odgovor2=pitanjeForm.value.odgovor2
+    question.odgovor3=pitanjeForm.value.odgovor3
+    question.odgovor4=pitanjeForm.value.odgovor4
+    question.opis=pitanjeForm.value.opis
+    question.bodovi=pitanjeForm.value.bodovi
     this.questionList.push(question)
 
   }
@@ -68,7 +71,6 @@ export class QuestionsSetComponent implements OnInit {
       return
     }
     let test=new ExamTest()
-    test.bodovi=value.bodovi
     test.trajanje=value.trajanje
     test.tema=value.tema
     test.testStart=value.testStart
@@ -89,7 +91,6 @@ export class QuestionsSetComponent implements OnInit {
       if(dialogResult == true){
        this.examTestService.insertTests(test).subscribe(
          data=> {
-          this.examTest
           this.snackBar.open("Test je uspesno kreiran","",{duration:2500})
           this.router.navigate(["/profexamdetails"],{state:{data:this.exam}})
          } ,
