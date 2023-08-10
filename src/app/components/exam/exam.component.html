@@ -1,116 +1,105 @@
 <div class="mat-elevation-z8">
-    <h4 style="text-align: center;">List of Exams</h4>
-    <div class="row">
-      <div class="col-3" >
-        <mat-form-field style="margin-left: 0.8em;">
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
-        </mat-form-field>
-      </div>
-      <div class="col-2" >
-        <button type="button" mat-raised-button (click)="onAddExam()">Add/Update Exam</button>
-      </div>
-      <div class="col-7" style="float: right;"> 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-      
-    </div>
-  
-    <table mat-table [dataSource]="dataSource" matSort >
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-        <mat-cell *matCellDef="let exam"> {{exam.id}} </mat-cell>
-      </ng-container>
+	<h4 style="text-align: center">List of Exams</h4>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-3">
+			<mat-form-field style="margin-left: 0.8em">
+				<mat-label>Search</mat-label>
+				<input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+			</mat-form-field>
+		</div>
+		<div class="col-2">
+			<button type="button" mat-raised-button (click)="onAddExam()">Add/Update Exam</button>
+		</div>
+		<div class="col-7" style="float: right">
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
 
-       <!-- Period Column -->
-       <ng-container matColumnDef="period">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Period </mat-header-cell>
-        <mat-cell *matCellDef="let exam"> {{exam.period}} </mat-cell>
-      </ng-container>
-  
-      <!-- Course Name Column -->
-      <ng-container matColumnDef="courseName">
-        <mat-header-cell *matHeaderCellDef> Course Name </mat-header-cell>
-        <mat-cell *matCellDef="let exam"> {{exam.course.name}} </mat-cell>
-      </ng-container>
-  
-      <!-- Date Time Column -->
-      <ng-container matColumnDef="examStart">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Exam Start </mat-header-cell>
-        <mat-cell *matCellDef="let exam"> {{exam.examStart|date:'medium'}} </mat-cell>
-      </ng-container>
+	<table mat-table [dataSource]="dataSource" matSort>
+		<!-- Position Column -->
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+			<mat-cell *matCellDef="let exam"> {{ exam.id }} </mat-cell>
+		</ng-container>
 
-       <!-- Archived Column -->
-      <ng-container matColumnDef="archived">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>Archived</mat-header-cell>
-        <mat-cell *matCellDef="let exam">{{exam.archived}}</mat-cell>
-      </ng-container>
+		<!-- Period Column -->
+		<ng-container matColumnDef="period">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Period </mat-header-cell>
+			<mat-cell *matCellDef="let exam"> {{ exam.period }} </mat-cell>
+		</ng-container>
 
-       <!-- Details Column -->
-       <ng-container matColumnDef="details">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-        <mat-cell *matCellDef="let exam">
-            <button type="button" mat-raised-button style="float: right;" (click)="details(exam)">Delete</button>
-        </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRowData(row)" ></mat-row>
-    </table>
+		<!-- Course Name Column -->
+		<ng-container matColumnDef="courseName">
+			<mat-header-cell *matHeaderCellDef> Course Name </mat-header-cell>
+			<mat-cell *matCellDef="let exam"> {{ exam.course.name }} </mat-cell>
+		</ng-container>
+
+		<!-- Date Time Column -->
+		<ng-container matColumnDef="examStart">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Exam Start </mat-header-cell>
+			<mat-cell *matCellDef="let exam"> {{ exam.examStart | date : 'medium' }} </mat-cell>
+		</ng-container>
+
+		<!-- Archived Column -->
+		<ng-container matColumnDef="archived">
+			<mat-header-cell *matHeaderCellDef mat-sort-header>Archived</mat-header-cell>
+			<mat-cell *matCellDef="let exam">{{ exam.archived }}</mat-cell>
+		</ng-container>
+
+		<!-- Details Column -->
+		<ng-container matColumnDef="details">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let exam">
+				<button type="button" mat-raised-button style="float: right" (click)="details(exam)">Delete</button>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns" (click)="getRowData(row)"></mat-row>
+	</table>
 </div>
 
-<div *ngIf="showInsertExam" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-    <h3 style="text-align: center;">Ucitaj ispit</h3>
-  <mat-card style="margin: 1.5em;">
-    <mat-card-content style="background-color: rgb(233, 233, 233);">
-      <form  [formGroup]="examForm" (ngSubmit)="onSubmitExam(examForm.value)" novalidate>
-  
-            <mat-form-field class="exam" appearance="standard">
-                <mat-label>Ispitni rok</mat-label>
-                <mat-select formControlName="period" >
-                  <mat-option value="JANUARY">Januar</mat-option>
-                  <mat-option value="MARCH">Mart</mat-option>
-                  <mat-option value="JUN">Jun</mat-option>
-                  <mat-option value="SEPTEMBER">Septembar</mat-option>
-                </mat-select>
-                <mat-error *ngIf="examForm.get('period').invalid &&
-                examForm.get('period').touched">
-               Ispitni rok je <strong>obavezan</strong>
-              </mat-error>
-              </mat-form-field>
+<div *ngIf="showInsertExam" style="margin-top: 1.5em" style="background: rgb(250, 206, 228)">
+	<h3 style="text-align: center">Ucitaj ispit</h3>
+	<mat-card style="margin: 1.5em">
+		<mat-card-content style="background-color: rgb(233, 233, 233)">
+			<form [formGroup]="examForm" (ngSubmit)="onSubmitExam(examForm.value)" novalidate>
+				<mat-form-field class="exam" appearance="standard">
+					<mat-label>Ispitni rok</mat-label>
+					<mat-select formControlName="period">
+						<mat-option value="JANUARY">Januar</mat-option>
+						<mat-option value="MARCH">Mart</mat-option>
+						<mat-option value="JUN">Jun</mat-option>
+						<mat-option value="SEPTEMBER">Septembar</mat-option>
+					</mat-select>
+					<mat-error *ngIf="examForm.get('period').invalid && examForm.get('period').touched"> Ispitni rok je <strong>obavezan</strong> </mat-error>
+				</mat-form-field>
 
-              <mat-form-field class="exam" appearance="standard">
-                <mat-label>Predmet</mat-label>
-                <mat-select formControlName="courseId" >
-                    <mat-option *ngFor="let course of courses" [value]="course.id">{{course.name}}</mat-option>
-                </mat-select>
-                <mat-error *ngIf="examForm.get('courseId').invalid &&
-                examForm.get('courseId').touched">
-                Predmet je <strong>obavezan</strong>
-              </mat-error>
-              </mat-form-field>
+				<mat-form-field class="exam" appearance="standard">
+					<mat-label>Predmet</mat-label>
+					<mat-select formControlName="courseId">
+						<mat-option *ngFor="let course of courses" [value]="course.id">{{ course.name }}</mat-option>
+					</mat-select>
+					<mat-error *ngIf="examForm.get('courseId').invalid && examForm.get('courseId').touched"> Predmet je <strong>obavezan</strong> </mat-error>
+				</mat-form-field>
 
-              <mat-form-field class="exam" appearance="standard">
-                <mat-label>Izaberi datum i vreme ispita</mat-label>
-                <input formControlName="examStart" matInput placeholder="pocetak ispita" autocomplete="off"
-                                         [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
-                                         <owl-date-time #dt></owl-date-time>
-                <mat-error *ngIf="examForm.get('examStart').invalid&&
-                examForm.get('examStart').touched">
-                  Pocetak ispita je<strong>obavezan</strong>
-                </mat-error>
-              </mat-form-field>
-  
-        <div class="staff" style="padding-bottom: 2em;">
-          <button [disabled]="!examForm.valid" type="submit" mat-raised-button style="float: left;margin-left: 8px;">Insert Exam</button>
-          <button [disabled]="examForm.value.id==null||examForm.value.id==''" type="button" (click)="onUpdate(examForm.value)" mat-raised-button style="float: left;margin-left: 8px;">Update Exam</button>
-          <button type="button" mat-raised-button style="float: left;margin-left: 8px;" (click)="onClear()">Clear</button>
-          <button type="button" mat-raised-button style="float: right;margin-right: 8px;" (click)="onCancel()">Cancel</button>
-        </div>
-      </form>
-      <!-- {{examForm.value | json}} -->
-    </mat-card-content>
-  </mat-card>
-  </div>
+				<mat-form-field class="exam" appearance="standard">
+					<mat-label>Izaberi datum i vreme ispita</mat-label>
+					<input formControlName="examStart" matInput placeholder="pocetak ispita" autocomplete="off" [owlDateTime]="dt" [owlDateTimeTrigger]="dt" />
+					<owl-date-time #dt></owl-date-time>
+					<mat-error *ngIf="examForm.get('examStart').invalid && examForm.get('examStart').touched"> Pocetak ispita je<strong>obavezan</strong> </mat-error>
+				</mat-form-field>
+
+				<div class="staff" style="padding-bottom: 2em">
+					<button [disabled]="!examForm.valid" type="submit" mat-raised-button style="float: left; margin-left: 8px">Insert Exam</button>
+					<button [disabled]="examForm.value.id == null || examForm.value.id == ''" type="button" (click)="onUpdate(examForm.value)" mat-raised-button style="float: left; margin-left: 8px">
+						Update Exam
+					</button>
+					<button type="button" mat-raised-button style="float: left; margin-left: 8px" (click)="onClear()">Clear</button>
+					<button type="button" mat-raised-button style="float: right; margin-right: 8px" (click)="onCancel()">Cancel</button>
+				</div>
+			</form>
+			<!-- {{examForm.value | json}} -->
+		</mat-card-content>
+	</mat-card>
+</div>

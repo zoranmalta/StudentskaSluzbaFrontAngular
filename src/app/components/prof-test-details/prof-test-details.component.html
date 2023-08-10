@@ -1,31 +1,32 @@
 <div class="container-fluid">
-    <ng-container *ngIf="infinite | async as workTestList " >
-        <div class="row">
-            <div class="col-11" >
-                <mat-card class="example-card" >
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Studenti koji su radili ispit iz : {{examTest.exam.course.name}}
-                            
-                            <button mat-raised-button (click)="nazad(examTest)" style="margin-left: 40px ;background-color: rgb(241, 150, 150);" >Nazad</button>
-                        </mat-card-title>
-                        <mat-card-subtitle>Tema testa : {{examTest.tema}} </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div >
-                            <mat-list  >
-                            <mat-list-item *ngFor="let workTest of workTestList;let i=index; trackBy: trackByIdx">
-                                <div mat-line>
-                                    <span>{{i+1+"."}} {{workTest.student.firstName+" "}} {{workTest.student.lastName}} </span>
-                                    <span style="color: red;float: right;margin-right: 10px;" *ngIf="examTest.zavrseno">Broj bodova : {{workTest.bodovi}} </span>
-                                </div>
-                                <button mat-raised-button (click)="detaljiTesta(workTest)" style="background-color: rgb(241, 150, 150);" > Detalji testa </button>
-                            </mat-list-item>
-                            </mat-list>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-    </ng-container>
+	<ng-container *ngIf="infinite | async as workTestList">
+		<div class="" style="display: flex; flex-direction: row">
+			<div class="col-11">
+				<mat-card class="example-card">
+					<mat-card-header>
+						<div mat-card-avatar class="example-header-image"></div>
+						<mat-card-title
+							>Studenti koji su radili ispit iz : {{ examTest.exam.course.name }}
+
+							<button mat-raised-button (click)="nazad(examTest)" style="margin-left: 40px; background-color: rgb(241, 150, 150)">Nazad</button>
+						</mat-card-title>
+						<mat-card-subtitle>Tema testa : {{ examTest.tema }} </mat-card-subtitle>
+					</mat-card-header>
+					<mat-card-content>
+						<div>
+							<mat-list>
+								<mat-list-item *ngFor="let workTest of workTestList; let i = index; trackBy: trackByIdx">
+									<div mat-line>
+										<span>{{ i + 1 + '.' }} {{ workTest.student.firstName + ' ' }} {{ workTest.student.lastName }} </span>
+										<span style="color: red; float: right; margin-right: 10px" *ngIf="examTest.zavrseno">Broj bodova : {{ workTest.bodovi }} </span>
+									</div>
+									<button mat-raised-button (click)="detaljiTesta(workTest)" style="background-color: rgb(241, 150, 150)">Detalji testa</button>
+								</mat-list-item>
+							</mat-list>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+	</ng-container>
 </div>

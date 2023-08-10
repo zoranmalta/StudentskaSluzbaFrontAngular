@@ -1,81 +1,75 @@
-
 <div class="mat-elevation-z8">
-    <h4 style="text-align: center;">List of Courses</h4>
-    <div class="row">
-      <div class="col-3" >
-        <mat-form-field style="margin-left: 0.8em;">
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
-        </mat-form-field>
-      </div>
-      <div class="col-2" >
-        <button type="button" mat-raised-button (click)="onAddCourse()">Add/Update Course</button>
-      </div>
-      <div class="col-7" style="float: right;"> 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-      
-    </div>
-  
-    <table mat-table [dataSource]="dataSource" matSort >
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-        <mat-cell *matCellDef="let course"> {{course.id}} </mat-cell>
-      </ng-container>
-  
-      <!--  Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-        <mat-cell *matCellDef="let course"> {{course.name}} </mat-cell>
-      </ng-container>
-  
-      <!-- Delete Column -->
-      <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-        <mat-cell *matCellDef="let course">
-          <button type="button" mat-raised-button style="float: right;" (click)="deleteCourse(course)">Delete</button>
-        </mat-cell>
-      </ng-container>
+	<h4 style="text-align: center">List of Courses</h4>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-3">
+			<mat-form-field style="margin-left: 0.8em">
+				<mat-label>Search</mat-label>
+				<input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+			</mat-form-field>
+		</div>
+		<div class="col-2">
+			<button type="button" mat-raised-button (click)="onAddCourse()">Add/Update Course</button>
+		</div>
+		<div class="col-7" style="float: right">
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
 
-       <!-- Details Column -->
-       <ng-container matColumnDef="details">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-        <mat-cell *matCellDef="let course">
-          <button type="button" mat-raised-button style="float: right;" (click)="details(course)">Details</button>
-        </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRowData(row)" ></mat-row>
-    </table>
-  </div>
+	<table mat-table [dataSource]="dataSource" matSort>
+		<!-- Position Column -->
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+			<mat-cell *matCellDef="let course"> {{ course.id }} </mat-cell>
+		</ng-container>
 
+		<!--  Name Column -->
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+			<mat-cell *matCellDef="let course"> {{ course.name }} </mat-cell>
+		</ng-container>
 
-  <div *ngIf="showCourseAdd" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-    <h3 style="text-align: center;">Insert/Update Course</h3>
-    <mat-card style="margin: 1.5em;">
-      <mat-card-content style="background-color: rgb(233, 233, 233);">
-        <form  [formGroup]="courseForm" (ngSubmit)="onSubmitCourse(courseForm.value)" novalidate>
+		<!-- Delete Column -->
+		<ng-container matColumnDef="delete">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let course">
+				<button type="button" mat-raised-button style="float: right" (click)="deleteCourse(course)">Delete</button>
+			</mat-cell>
+		</ng-container>
 
-          <mat-form-field class="course" appearance="standard">
-            <mat-label>Course Name</mat-label>
-            <input formControlName="name" matInput placeholder="name">
-            <mat-error *ngIf="courseForm.get('name').invalid&&
-                              courseForm.get('name').touched">
-              Course Name is <strong>required</strong>
-            </mat-error>
-          </mat-form-field>
+		<!-- Details Column -->
+		<ng-container matColumnDef="details">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let course">
+				<button type="button" mat-raised-button style="float: right" (click)="details(course)">Details</button>
+			</mat-cell>
+		</ng-container>
 
-          <div class="course" style="padding-bottom: 2em;">
-            <button [disabled]="!courseForm.valid" type="submit" mat-raised-button style="float: left;">Insert Course</button>
-            <button [disabled]="courseForm.value.id==null||courseForm.value.id==''" type="button" (click)="onUpdate(courseForm.value)" mat-raised-button style="float: left;">Update Course</button>
-            <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
-            <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
-          </div>
-        </form>
-        {{courseForm.value | json}}
-      </mat-card-content>
-    </mat-card>
-  </div>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns" (click)="getRowData(row)"></mat-row>
+	</table>
+</div>
+
+<div *ngIf="showCourseAdd" style="margin-top: 1.5em" style="background: rgb(250, 206, 228)">
+	<h3 style="text-align: center">Insert/Update Course</h3>
+	<mat-card style="margin: 1.5em">
+		<mat-card-content style="background-color: rgb(233, 233, 233)">
+			<form [formGroup]="courseForm" (ngSubmit)="onSubmitCourse(courseForm.value)" novalidate>
+				<mat-form-field class="course" appearance="standard">
+					<mat-label>Course Name</mat-label>
+					<input formControlName="name" matInput placeholder="name" />
+					<mat-error *ngIf="courseForm.get('name').invalid && courseForm.get('name').touched"> Course Name is <strong>required</strong> </mat-error>
+				</mat-form-field>
+
+				<div class="course" style="padding-bottom: 2em">
+					<button [disabled]="!courseForm.valid" type="submit" mat-raised-button style="float: left">Insert Course</button>
+					<button [disabled]="courseForm.value.id == null || courseForm.value.id == ''" type="button" (click)="onUpdate(courseForm.value)" mat-raised-button style="float: left">
+						Update Course
+					</button>
+					<button type="button" mat-raised-button style="float: left" (click)="onClear()">Clear</button>
+					<button type="button" mat-raised-button style="float: right" (click)="onCancel()">Cancel</button>
+				</div>
+			</form>
+			{{ courseForm.value | json }}
+		</mat-card-content>
+	</mat-card>
+</div>

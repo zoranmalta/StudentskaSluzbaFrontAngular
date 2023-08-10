@@ -1,131 +1,113 @@
 <div class="mat-elevation-z8">
-    <h4 style="text-align: center;">List of Staff</h4>
-    <div class="row">
-      <div class="col-3" >
-        <mat-form-field style="margin-left: 0.8em;">
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
-        </mat-form-field>
-      </div>
-      <div class="col-2" >
-        <button type="button" mat-raised-button (click)="onAddStaff()">Add/Update Staff</button>
-      </div>
-      <div class="col-7" style="float: right;"> 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-      
-    </div>
-  
-    <table mat-table [dataSource]="dataSource" matSort >
-  
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
-        <mat-cell *matCellDef="let staff"> {{staff.id}} </mat-cell>
-      </ng-container>
-  
-      <!-- First Name Column -->
-      <ng-container matColumnDef="firstName">
-        <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-        <mat-cell *matCellDef="let staff"> {{staff.firstName}} </mat-cell>
-      </ng-container>
-  
-      <!-- Last Name Column -->
-      <ng-container matColumnDef="lastName">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-        <mat-cell *matCellDef="let staff"> {{staff.lastName}} </mat-cell>
-      </ng-container>
-  
-      <!-- Academid Column -->
-      <ng-container matColumnDef="academic">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Academic </mat-header-cell>
-        <mat-cell *matCellDef="let staff"> {{staff.academic.name}} </mat-cell>
-      </ng-container>
+	<h4 style="text-align: center">List of Staff</h4>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-3">
+			<mat-form-field style="margin-left: 0.8em">
+				<mat-label>Search</mat-label>
+				<input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+			</mat-form-field>
+		</div>
+		<div class="col-2">
+			<button type="button" mat-raised-button (click)="onAddStaff()">Add/Update Staff</button>
+		</div>
+		<div class="col-7" style="float: right">
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
 
-       <!-- Delete Column -->
-      <ng-container matColumnDef="delete">
-        <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-        <mat-cell *matCellDef="let staff">
-          <button type="button" mat-raised-button style="float: right;" (click)="deleteStaffAndUser(staff)">Delete</button>
-        </mat-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRowData(row)" ></mat-row>
-    </table>
+	<table mat-table [dataSource]="dataSource" matSort>
+		<!-- Position Column -->
+		<ng-container matColumnDef="id">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Id </mat-header-cell>
+			<mat-cell *matCellDef="let staff"> {{ staff.id }} </mat-cell>
+		</ng-container>
+
+		<!-- First Name Column -->
+		<ng-container matColumnDef="firstName">
+			<mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+			<mat-cell *matCellDef="let staff"> {{ staff.firstName }} </mat-cell>
+		</ng-container>
+
+		<!-- Last Name Column -->
+		<ng-container matColumnDef="lastName">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+			<mat-cell *matCellDef="let staff"> {{ staff.lastName }} </mat-cell>
+		</ng-container>
+
+		<!-- Academid Column -->
+		<ng-container matColumnDef="academic">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Academic </mat-header-cell>
+			<mat-cell *matCellDef="let staff"> {{ staff.academic.name }} </mat-cell>
+		</ng-container>
+
+		<!-- Delete Column -->
+		<ng-container matColumnDef="delete">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let staff">
+				<button type="button" mat-raised-button style="float: right" (click)="deleteStaffAndUser(staff)">Delete</button>
+			</mat-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns" (click)="getRowData(row)"></mat-row>
+	</table>
 </div>
 
-<div *ngIf="showInsertStaff" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-    <h3 style="text-align: center;">Insert/Update Staff</h3>
-  <mat-card style="margin: 1.5em;">
-    <mat-card-content style="background-color: rgb(233, 233, 233);">
-      <form  [formGroup]="staffForm" (ngSubmit)="onSubmitStaff(staffForm.value)" novalidate>
-  
-        <mat-form-field class="staff" appearance="standard">
-          <mat-label>First Name</mat-label>
-          <input formControlName="firstName" matInput placeholder="first name">
-          <mat-error *ngIf="staffForm.get('firstName').invalid&&
-                            staffForm.get('firstName').touched">
-            First Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-  
-        <mat-form-field class="staff" appearance="standard">
-          <mat-label>Last Name</mat-label>
-          <input formControlName="lastName" matInput placeholder="last name">
-          <mat-error *ngIf="staffForm.get('lastName').invalid&&
-                            staffForm.get('lastName').touched">
-            Last Name is <strong>required</strong>
-          </mat-error>
-        </mat-form-field>
-  
-        <div formGroupName="user">
-  
-          <mat-form-field class="staff" appearance="standard">
-            <mat-label>Username</mat-label>
-            <input #uname formControlName="username" matInput [errorStateMatcher]="matcher" placeholder="username">
-            <mat-error *ngIf="staffForm.get('user').get('username').hasError('forbiddenName') && !staffForm.get('user').get('username').hasError('required')">
-              {{ uname.value}} Username not allowed
-            </mat-error>
-            <mat-error *ngIf="staffForm.get('user').get('username').hasError('required')">
-              Username is <strong>required</strong>
-            </mat-error>
-         
-          </mat-form-field>
-  
-          <mat-form-field class="staff" appearance="standard">
-            <mat-label>Password</mat-label>
-            <input formControlName="password" matInput placeholder="pass-123">
-            <mat-error *ngIf="staffForm.get('user').get('password').invalid &&
-            staffForm.get('user').get('password').touched">
-            Password is <strong>required</strong>
-          </mat-error>
-          </mat-form-field>
-  
-        </div>
+<div *ngIf="showInsertStaff" style="margin-top: 1.5em" style="background: rgb(250, 206, 228)">
+	<h3 style="text-align: center">Insert/Update Staff</h3>
+	<mat-card style="margin: 1.5em">
+		<mat-card-content style="background-color: rgb(233, 233, 233)">
+			<form [formGroup]="staffForm" (ngSubmit)="onSubmitStaff(staffForm.value)" novalidate>
+				<mat-form-field class="staff" appearance="standard">
+					<mat-label>First Name</mat-label>
+					<input formControlName="firstName" matInput placeholder="first name" />
+					<mat-error *ngIf="staffForm.get('firstName').invalid && staffForm.get('firstName').touched"> First Name is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-        <div formGroupName="academic">
-            <mat-form-field class="staff" appearance="standard">
-                <mat-label>Academic name</mat-label>
-                <mat-select formControlName="id" >
-                  <mat-option value="1">Profesor</mat-option>
-                  <mat-option value="2">Asistent</mat-option>
-                </mat-select>
-                <mat-error *ngIf="staffForm.get('academic').get('id').invalid &&
-                staffForm.get('academic').get('id').touched">
-                Academic id is <strong>required</strong>
-              </mat-error>
-              </mat-form-field>
-        </div>
-  
-        <div class="staff" style="padding-bottom: 2em;">
-          <button [disabled]="!staffForm.valid" type="submit" mat-raised-button style="float: left;">Insert Staff</button>
-          <button [disabled]="staffForm.value.id==null||staffForm.value.id==''" type="button" (click)="onUpdate(staffForm.value)" mat-raised-button style="float: left;">Update Staff</button>
-          <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
-          <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
-        </div>
-      </form>
-      {{staffForm.value | json}}
-    </mat-card-content>
-  </mat-card>
-  </div>
+				<mat-form-field class="staff" appearance="standard">
+					<mat-label>Last Name</mat-label>
+					<input formControlName="lastName" matInput placeholder="last name" />
+					<mat-error *ngIf="staffForm.get('lastName').invalid && staffForm.get('lastName').touched"> Last Name is <strong>required</strong> </mat-error>
+				</mat-form-field>
+
+				<div formGroupName="user">
+					<mat-form-field class="staff" appearance="standard">
+						<mat-label>Username</mat-label>
+						<input #uname formControlName="username" matInput [errorStateMatcher]="matcher" placeholder="username" />
+						<mat-error *ngIf="staffForm.get('user').get('username').hasError('forbiddenName') && !staffForm.get('user').get('username').hasError('required')">
+							{{ uname.value }} Username not allowed
+						</mat-error>
+						<mat-error *ngIf="staffForm.get('user').get('username').hasError('required')"> Username is <strong>required</strong> </mat-error>
+					</mat-form-field>
+
+					<mat-form-field class="staff" appearance="standard">
+						<mat-label>Password</mat-label>
+						<input formControlName="password" matInput placeholder="pass-123" />
+						<mat-error *ngIf="staffForm.get('user').get('password').invalid && staffForm.get('user').get('password').touched"> Password is <strong>required</strong> </mat-error>
+					</mat-form-field>
+				</div>
+
+				<div formGroupName="academic">
+					<mat-form-field class="staff" appearance="standard">
+						<mat-label>Academic name</mat-label>
+						<mat-select formControlName="id">
+							<mat-option value="1">Profesor</mat-option>
+							<mat-option value="2">Asistent</mat-option>
+						</mat-select>
+						<mat-error *ngIf="staffForm.get('academic').get('id').invalid && staffForm.get('academic').get('id').touched"> Academic id is <strong>required</strong> </mat-error>
+					</mat-form-field>
+				</div>
+
+				<div class="staff" style="padding-bottom: 2em">
+					<button [disabled]="!staffForm.valid" type="submit" mat-raised-button style="float: left">Insert Staff</button>
+					<button [disabled]="staffForm.value.id == null || staffForm.value.id == ''" type="button" (click)="onUpdate(staffForm.value)" mat-raised-button style="float: left">
+						Update Staff
+					</button>
+					<button type="button" mat-raised-button style="float: left" (click)="onClear()">Clear</button>
+					<button type="button" mat-raised-button style="float: right" (click)="onCancel()">Cancel</button>
+				</div>
+			</form>
+			{{ staffForm.value | json }}
+		</mat-card-content>
+	</mat-card>
+</div>

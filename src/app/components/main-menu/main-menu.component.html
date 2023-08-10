@@ -1,69 +1,43 @@
-<ul class="heroes" style="vertical-align: middle;">
+<div class="main-menu-container">
+	<!-- admin meni -->
+	<div *ngIf="isAdminRole" class="main-menu-list-item">
+		<a routerLink="/student" class="main-menu-link-style"> Studenti </a>
+	</div>
+	<div *ngIf="isAdminRole" class="main-menu-list-item">
+		<a routerLink="/course" class="main-menu-link-style"> Predmeti </a>
+	</div>
+	<div *ngIf="isAdminRole" class="main-menu-list-item">
+		<a routerLink="/staff" class="main-menu-link-style"> Personal </a>
+	</div>
+	<div *ngIf="isAdminRole" class="main-menu-list-item">
+		<a routerLink="/exam" class="main-menu-link-style"> Ispiti </a>
+	</div>
+	<div *ngIf="isAdminRole" class="main-menu-list-item">
+		<a routerLink="/document" class="main-menu-link-style"> Dokumenta </a>
+	</div>
 
-  <!-- admin meni -->
-  <li *ngIf="isAdminRole"  >
-    <a routerLink="/student">
-      <span class="badge">*</span> Studenti
-    </a>
-  </li>
-  <li *ngIf="isAdminRole">
-      <a routerLink="/course">
-        <span class="badge">*</span> Predmeti
-      </a>
-    </li>
-    <li *ngIf="isAdminRole">
-      <a routerLink="/staff">
-        <span class="badge">*</span> Personal
-      </a>
-    </li>
-    <li *ngIf="isAdminRole">
-      <a routerLink="/exam">
-        <span class="badge">*</span> Ispiti 
-      </a>
-    </li>
-    <li *ngIf="isAdminRole">
-      <a routerLink="/document">
-        <span class="badge">*</span> Dokumenta
-      </a>
-    </li>
+	<!-- studentski meni -->
+	<div *ngIf="isUserRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/showcourses" class="main-menu-link-style"> Predmeti </a>
+	</div>
+	<div *ngIf="isUserRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/examregistration" class="main-menu-link-style"> Prijava/Odjava ispita </a>
+	</div>
+	<div *ngIf="isUserRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/examtestregistrationcomponent" class="main-menu-link-style"> Prijavljeni ispiti </a>
+	</div>
+	<div *ngIf="isUserRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/passedexams" class="main-menu-link-style"> Položeni ispiti </a>
+	</div>
+	<div *ngIf="isUserRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/payment" class="main-menu-link-style"> Finansijska kartica </a>
+	</div>
 
-    <!-- studentski meni -->
-    <li *ngIf="isUserRole && !isAdminRole">
-      <a routerLink="/showcourses">
-        <span class="badge">*</span> Predmeti
-      </a>
-    </li>
-    <li *ngIf="isUserRole && !isAdminRole">
-      <a routerLink="/examregistration">
-        <span class="badge">*</span> Prijava/Odjava Ispita
-      </a>
-    </li>
-    <li *ngIf="isUserRole && !isAdminRole">
-      <a routerLink="/examtestregistrationcomponent">
-        <span class="badge">*</span> Prijavljeni ispiti
-      </a>
-    </li>
-    <li *ngIf="isUserRole && !isAdminRole">
-      <a routerLink="/passedexams">
-        <span class="badge">*</span> Polozeni Ispiti
-      </a>
-    </li>
-    <li *ngIf="isUserRole&&!isAdminRole">
-      <a routerLink="/payment">
-        <span class="badge">*</span> Finansijska Kartica
-      </a>
-    </li>
-
-    <!-- profesorski meni -->
-    <li *ngIf="isProfRole&&!isAdminRole">
-      <a routerLink="/profexam">
-        <span class="badge">*</span> Predmeti
-      </a>
-    </li>
-    <li *ngIf="isProfRole&&!isAdminRole">
-      <a routerLink="/profexam">
-        <span class="badge">*</span> Ispiti/Ocene Ispita
-      </a>
-    </li>
-  
-</ul>
+	<!-- profesorski meni -->
+	<div *ngIf="isProfRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/profexam" class="main-menu-link-style"> Predmeti </a>
+	</div>
+	<div *ngIf="isProfRole && !isAdminRole" class="main-menu-list-item">
+		<a routerLink="/profexam" class="main-menu-link-style"> Ispiti/Ocene ispita </a>
+	</div>
+</div>

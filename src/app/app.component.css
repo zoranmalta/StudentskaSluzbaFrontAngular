@@ -1,0 +1,15 @@
+.page-container {
+	display: flex;
+	flex-direction: row;
+}
+.side-bar-container {
+	width: 250px;
+	display: flex;
+	flex-direction: column;
+	height: calc(100vh - 54px);
+	background-color: rgb(72, 78, 84);
+}
+.main-screen-container {
+	width: calc(100% - 250px);
+	height: calc(100vh - 54px);
+}

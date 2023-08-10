@@ -1,76 +1,69 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-5" >
-            <mat-card class="example-card">
-                <mat-card-header>
-                  <div mat-card-avatar class="example-header-image"></div>
-                <mat-card-title>Course : {{course.name}}</mat-card-title>
-                  <mat-card-subtitle></mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                  <p>
-                    Description :
-                  </p>
-                </mat-card-content>
-                <mat-card-actions>
-                  <button mat-raised-button (click)="displayStaffForAdd()" >Add Staff</button>
-                  <button mat-raised-button (click)="deleteSelctedStaff()">Delete Staff</button>
-                </mat-card-actions>
-                <mat-card-actions>
-                  <button mat-raised-button (click)="displayStudentsForAdd()">Add Students</button>
-                  <button mat-raised-button (click)="deleteSelectedStudents()">Delete Students</button>
-                </mat-card-actions>
-              </mat-card>
-        </div>
-        <div class="col-7" >
-           <div *ngIf="showStaffEngaged">
-            <div>
-              Selected: {{ selectedStaffOptions | json }}
-            </div>
-            <mat-selection-list [(ngModel)]="selectedStaffOptions " >
-              <mat-list-option *ngFor="let staff of staffList" [value]="staff">
-                 <span>{{ staff.academic.name+" "}} : </span>{{staff.lastName+" "}}{{staff.firstName}}
-              </mat-list-option>
-            </mat-selection-list>
-           </div>
-        </div>
-  </div>
-    <div *ngIf="showStudentsEnroll">
-        <h3 style="text-align: center;">lista studenata koji pohadjaju kurs </h3>
-        <mat-selection-list #selectedStudents [(ngModel)]="selectedOptions " 
-                            (ngModelChange)="onNgModelChange($event)">
-            <mat-list-option #allSelected (click)="toggleAllSelection()" >All</mat-list-option>
-            <mat-list-option *ngFor="let student of students" [value]="student" (click)="togglePerOne()">
-              {{student.cardNumber+" "}}:{{" "+student.firstName+" "}}{{student.lastName}}
-            </mat-list-option>
-        </mat-selection-list>
-    </div>
-    <div *ngIf="showStudentsForAdd">
-      <div>
-        <h3 style="text-align: center;">lista studenata koji ne pohadjaju kurs </h3>
-          <span><button mat-raised-button (click)="addSelectedStudents()">Add Selected Students</button></span>
-          <span><button mat-raised-button (click)="cancelAddStudents()">Cancel</button></span>
-      </div>
-      <mat-selection-list #selectedStudentsForAdd [(ngModel)]="selectedOptionsForAdd " >
-          <mat-list-option #allSelectedForAdd (click)="toggleAllSelectionForAdd()" >All</mat-list-option>
-          <mat-list-option *ngFor="let student of studentsForAdd" [value]="student" (click)="togglePerOneForAdd()">
-            {{student.cardNumber+" "}}:{{" "+student.firstName+" "}}{{student.lastName}}
-          </mat-list-option>
-      </mat-selection-list>
-    </div>
-    <div *ngIf="showStaffForEngaged">
-      <div>
-        <h3 style="text-align: center;">lista personala koji ne predaju kurs </h3>
-          <span><button mat-raised-button (click)="addSelectedStaff()">Add Selected Staff</button></span>
-          <span><button mat-raised-button (click)="cancelAddStaff()">Cancel</button></span>
-      </div>
-      <div>
-        Selected: {{ selectedStaffOptionsForAdd | json }}
-      </div>
-      <mat-selection-list [(ngModel)]="selectedStaffOptionsForAdd " >
-        <mat-list-option *ngFor="let staff of staffForAdd" [value]="staff" >
-           <span>{{ staff.academic.name+" "}} : </span>{{staff.lastName+" "}}{{staff.firstName}}
-        </mat-list-option>
-      </mat-selection-list>
-     </div>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-5">
+			<mat-card class="example-card">
+				<mat-card-header>
+					<div mat-card-avatar class="example-header-image"></div>
+					<mat-card-title>Course : {{ course.name }}</mat-card-title>
+					<mat-card-subtitle></mat-card-subtitle>
+				</mat-card-header>
+				<mat-card-content>
+					<p>Description :</p>
+				</mat-card-content>
+				<mat-card-actions>
+					<button mat-raised-button (click)="displayStaffForAdd()">Add Staff</button>
+					<button mat-raised-button (click)="deleteSelctedStaff()">Delete Staff</button>
+				</mat-card-actions>
+				<mat-card-actions>
+					<button mat-raised-button (click)="displayStudentsForAdd()">Add Students</button>
+					<button mat-raised-button (click)="deleteSelectedStudents()">Delete Students</button>
+				</mat-card-actions>
+			</mat-card>
+		</div>
+		<div class="col-7">
+			<div *ngIf="showStaffEngaged">
+				<div>Selected: {{ selectedStaffOptions | json }}</div>
+				<mat-selection-list [(ngModel)]="selectedStaffOptions">
+					<mat-list-option *ngFor="let staff of staffList" [value]="staff">
+						<span>{{ staff.academic.name + ' ' }} : </span>{{ staff.lastName + ' ' }}{{ staff.firstName }}
+					</mat-list-option>
+				</mat-selection-list>
+			</div>
+		</div>
+	</div>
+	<div *ngIf="showStudentsEnroll">
+		<h3 style="text-align: center">lista studenata koji pohadjaju kurs</h3>
+		<mat-selection-list #selectedStudents [(ngModel)]="selectedOptions" (ngModelChange)="onNgModelChange($event)">
+			<mat-list-option #allSelected (click)="toggleAllSelection()">All</mat-list-option>
+			<mat-list-option *ngFor="let student of students" [value]="student" (click)="togglePerOne()">
+				{{ student.cardNumber + ' ' }}:{{ ' ' + student.firstName + ' ' }}{{ student.lastName }}
+			</mat-list-option>
+		</mat-selection-list>
+	</div>
+	<div *ngIf="showStudentsForAdd">
+		<div>
+			<h3 style="text-align: center">lista studenata koji ne pohadjaju kurs</h3>
+			<span><button mat-raised-button (click)="addSelectedStudents()">Add Selected Students</button></span>
+			<span><button mat-raised-button (click)="cancelAddStudents()">Cancel</button></span>
+		</div>
+		<mat-selection-list #selectedStudentsForAdd [(ngModel)]="selectedOptionsForAdd">
+			<mat-list-option #allSelectedForAdd (click)="toggleAllSelectionForAdd()">All</mat-list-option>
+			<mat-list-option *ngFor="let student of studentsForAdd" [value]="student" (click)="togglePerOneForAdd()">
+				{{ student.cardNumber + ' ' }}:{{ ' ' + student.firstName + ' ' }}{{ student.lastName }}
+			</mat-list-option>
+		</mat-selection-list>
+	</div>
+	<div *ngIf="showStaffForEngaged">
+		<div>
+			<h3 style="text-align: center">lista personala koji ne predaju kurs</h3>
+			<span><button mat-raised-button (click)="addSelectedStaff()">Add Selected Staff</button></span>
+			<span><button mat-raised-button (click)="cancelAddStaff()">Cancel</button></span>
+		</div>
+		<div>Selected: {{ selectedStaffOptionsForAdd | json }}</div>
+		<mat-selection-list [(ngModel)]="selectedStaffOptionsForAdd">
+			<mat-list-option *ngFor="let staff of staffForAdd" [value]="staff">
+				<span>{{ staff.academic.name + ' ' }} : </span>{{ staff.lastName + ' ' }}{{ staff.firstName }}
+			</mat-list-option>
+		</mat-selection-list>
+	</div>
 </div>

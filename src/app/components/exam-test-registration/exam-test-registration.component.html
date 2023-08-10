@@ -1,30 +1,32 @@
 <div class="container-fluid">
-    <ng-container *ngIf="infinite | async as examList " >
-        <div class="row">
-            <div class="col-11" >
-                <mat-card class="example-card" *ngFor="let exam of examList; let i=index; trackBy: trackByIdx">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Predmet : {{exam.course.name}} </mat-card-title>
-                        <mat-card-subtitle>Ispitni rok : {{exam.period}} </mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <div >
-                            <mat-list  >
-                            <mat-list-item *ngFor="let examTest of exam.examTestList;let i=index; trackBy: trackByIdx">
-                                <div mat-line>
-                                    <span>{{"Tema : "+ examTest.tema +" Pocetak : "}} {{examTest.testStart |date:'medium'}} </span>
-                                    <span style="color: red;float: right;margin-right: 10px;" *ngIf="examTest.zavrseno"> Test je zavrsen </span>
-                                    <span style="color:rgb(2, 105, 2);float: right;margin-right: 10px;" *ngIf="!examTest.zavrseno && examTest.dostupno"> Test je aktivan </span>
-                                    <span style="color:rgb(31, 11, 87);float: right;margin-right: 10px;" *ngIf="!examTest.zavrseno && !examTest.dostupno"> Test je zakazan </span>
-                                </div>
-                                <button mat-raised-button [disabled]="examTest.zavrseno || !examTest.dostupno" (click)="pocniTest(examTest)" style="background-color: rgb(241, 150, 150);" > Pocni test </button>
-                            </mat-list-item>
-                            </mat-list>
-                        </div>
-                    </mat-card-content>
-                </mat-card>
-            </div>
-        </div>
-    </ng-container>
+	<ng-container *ngIf="infinite | async as examList">
+		<div class="" style="display: flex; flex-direction: row">
+			<div class="col-11">
+				<mat-card class="example-card" *ngFor="let exam of examList; let i = index; trackBy: trackByIdx">
+					<mat-card-header>
+						<div mat-card-avatar class="example-header-image"></div>
+						<mat-card-title>Predmet : {{ exam.course.name }} </mat-card-title>
+						<mat-card-subtitle>Ispitni rok : {{ exam.period }} </mat-card-subtitle>
+					</mat-card-header>
+					<mat-card-content>
+						<div>
+							<mat-list>
+								<mat-list-item *ngFor="let examTest of exam.examTestList; let i = index; trackBy: trackByIdx">
+									<div mat-line>
+										<span>{{ 'Tema : ' + examTest.tema + ' Pocetak : ' }} {{ examTest.testStart | date : 'medium' }} </span>
+										<span style="color: red; float: right; margin-right: 10px" *ngIf="examTest.zavrseno"> Test je zavrsen </span>
+										<span style="color: rgb(2, 105, 2); float: right; margin-right: 10px" *ngIf="!examTest.zavrseno && examTest.dostupno"> Test je aktivan </span>
+										<span style="color: rgb(31, 11, 87); float: right; margin-right: 10px" *ngIf="!examTest.zavrseno && !examTest.dostupno"> Test je zakazan </span>
+									</div>
+									<button mat-raised-button [disabled]="examTest.zavrseno || !examTest.dostupno" (click)="pocniTest(examTest)" style="background-color: rgb(241, 150, 150)">
+										Pocni test
+									</button>
+								</mat-list-item>
+							</mat-list>
+						</div>
+					</mat-card-content>
+				</mat-card>
+			</div>
+		</div>
+	</ng-container>
 </div>

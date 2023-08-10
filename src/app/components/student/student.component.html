@@ -1,198 +1,168 @@
-
 <div class="mat-elevation-z8">
-  <h4 style="text-align: center;">List of Studnets</h4>
-  <div class="row">
-    <div class="col-3" >
-      <mat-form-field style="margin-left: 0.8em;">
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Search">
-      </mat-form-field>
-    </div>
-    <div class="col-2" >
-      <button type="button" mat-raised-button (click)="onAddStudent()">Add/Update Student</button>
-    </div>
-    <div class="col-7" style="float: right;"> 
-      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-    </div>
-    
-  </div>
+	<h4 style="text-align: center">List of Studnets</h4>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-3">
+			<mat-form-field style="margin-left: 0.8em">
+				<mat-label>Search</mat-label>
+				<input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+			</mat-form-field>
+		</div>
+		<div class="col-2">
+			<button type="button" mat-raised-button (click)="onAddStudent()">Add/Update Student</button>
+		</div>
+		<div class="col-7" style="float: right">
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
 
-  <table mat-table [dataSource]="dataSource" matSort >
+	<table mat-table [dataSource]="dataSource" matSort>
+		<!-- Card Number Column -->
+		<ng-container matColumnDef="cardNumber">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Card Number </mat-header-cell>
+			<mat-cell *matCellDef="let student"> {{ student.cardNumber }} </mat-cell>
+		</ng-container>
 
-    <!-- Card Number Column -->
-    <ng-container matColumnDef="cardNumber">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Card Number </mat-header-cell>
-      <mat-cell *matCellDef="let student"> {{student.cardNumber}} </mat-cell>
-    </ng-container>
+		<!-- First Name Column -->
+		<ng-container matColumnDef="firstName">
+			<mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
+			<mat-cell *matCellDef="let student"> {{ student.firstName }} </mat-cell>
+		</ng-container>
 
-    <!-- First Name Column -->
-    <ng-container matColumnDef="firstName">
-      <mat-header-cell *matHeaderCellDef> First Name </mat-header-cell>
-      <mat-cell *matCellDef="let student"> {{student.firstName}} </mat-cell>
-    </ng-container>
+		<!-- Last Name Column -->
+		<ng-container matColumnDef="lastName">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
+			<mat-cell *matCellDef="let student"> {{ student.lastName }} </mat-cell>
+		</ng-container>
 
-    <!-- Last Name Column -->
-    <ng-container matColumnDef="lastName">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </mat-header-cell>
-      <mat-cell *matCellDef="let student"> {{student.lastName}} </mat-cell>
-    </ng-container>
+		<!-- Address Column -->
+		<ng-container matColumnDef="address">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
+			<mat-cell *matCellDef="let student"> {{ student.address }} </mat-cell>
+		</ng-container>
 
-    <!-- Address Column -->
-    <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Address </mat-header-cell>
-      <mat-cell *matCellDef="let student"> {{student.address}} </mat-cell>
-    </ng-container>
+		<!-- AccountBalance Column -->
+		<ng-container matColumnDef="accountBalance">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Amount Balance</mat-header-cell>
+			<mat-cell *matCellDef="let student" style="margin-left: 25px"> {{ '  rsd:  ' + student.accountBalance }} </mat-cell>
+		</ng-container>
 
-    <!-- AccountBalance Column -->
-    <ng-container matColumnDef="accountBalance">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Amount Balance</mat-header-cell>
-      <mat-cell *matCellDef="let student" style="margin-left: 25px;"> {{"  rsd:  "+student.accountBalance}} </mat-cell>
-    </ng-container>
+		<!-- Email Column -->
+		<ng-container matColumnDef="email">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+			<mat-cell *matCellDef="let student"> {{ student.email }} </mat-cell>
+		</ng-container>
 
-    <!-- Email Column -->
-    <ng-container matColumnDef="email">
-      <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-      <mat-cell *matCellDef="let student"> {{student.email}} </mat-cell>
-    </ng-container>
+		<!-- Delete Column -->
+		<ng-container matColumnDef="delete">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let student">
+				<button type="button" mat-raised-button style="float: right" (click)="deleteStudentAndUser(student)">Delete</button>
+			</mat-cell>
+		</ng-container>
 
-    <!-- Delete Column -->
-    <ng-container matColumnDef="delete">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-      <mat-cell *matCellDef="let student">
-        <button type="button" mat-raised-button style="float: right;" (click)="deleteStudentAndUser(student)">Delete</button>
-      </mat-cell>
-    </ng-container>
+		<!-- Payments Column -->
+		<ng-container matColumnDef="payments">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> </mat-header-cell>
+			<mat-cell *matCellDef="let student">
+				<button type="button" mat-raised-button style="float: right" (click)="addPayment(student)">Payment</button>
+			</mat-cell>
+		</ng-container>
 
-     <!-- Payments Column -->
-     <ng-container matColumnDef="payments">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>  </mat-header-cell>
-      <mat-cell *matCellDef="let student">
-        <button type="button" mat-raised-button style="float: right;" (click)=" addPayment(student)">Payment</button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="getRowData(row)" ></mat-row>
-  </table>
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns" (click)="getRowData(row)"></mat-row>
+	</table>
 </div>
 
-<div *ngIf="showInsertStudent" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-  <h3 style="text-align: center;">Insert/Update Student</h3>
-<mat-card style="margin: 1.5em;">
-  <mat-card-content style="background-color: rgb(233, 233, 233);">
-    <form  [formGroup]="studentForm" (ngSubmit)="onSubmitStudent(studentForm.value)" novalidate>
+<div *ngIf="showInsertStudent" style="margin-top: 1.5em" style="background: rgb(250, 206, 228)">
+	<h3 style="text-align: center">Insert/Update Student</h3>
+	<mat-card style="margin: 1.5em">
+		<mat-card-content style="background-color: rgb(233, 233, 233)">
+			<form [formGroup]="studentForm" (ngSubmit)="onSubmitStudent(studentForm.value)" novalidate>
+				<mat-form-field class="student" appearance="standard">
+					<mat-label>Card Number</mat-label>
+					<input formControlName="cardNumber" matInput placeholder="xx-xxx" />
+					<mat-error *ngIf="studentForm.get('cardNumber').invalid && studentForm.get('cardNumber').touched"> Card Number is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-      <mat-form-field class="student" appearance="standard">
-        <mat-label>Card Number</mat-label>
-        <input formControlName="cardNumber" matInput placeholder="xx-xxx">
-        <mat-error *ngIf="studentForm.get('cardNumber').invalid&&
-                          studentForm.get('cardNumber').touched">
-          Card Number is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+				<mat-form-field class="student" appearance="standard">
+					<mat-label>First Name</mat-label>
+					<input formControlName="firstName" matInput placeholder="first name" />
+					<mat-error *ngIf="studentForm.get('firstName').invalid && studentForm.get('firstName').touched"> First Name is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-      <mat-form-field class="student" appearance="standard">
-        <mat-label>First Name</mat-label>
-        <input formControlName="firstName" matInput placeholder="first name">
-        <mat-error *ngIf="studentForm.get('firstName').invalid&&
-                          studentForm.get('firstName').touched">
-          First Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+				<mat-form-field class="student" appearance="standard">
+					<mat-label>Last Name</mat-label>
+					<input formControlName="lastName" matInput placeholder="last name" />
+					<mat-error *ngIf="studentForm.get('lastName').invalid && studentForm.get('lastName').touched"> Last Name is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-      <mat-form-field class="student" appearance="standard">
-        <mat-label>Last Name</mat-label>
-        <input formControlName="lastName" matInput placeholder="last name">
-        <mat-error *ngIf="studentForm.get('lastName').invalid&&
-                          studentForm.get('lastName').touched">
-          Last Name is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+				<mat-form-field class="student" appearance="standard">
+					<mat-label>Address </mat-label>
+					<input formControlName="address" matInput placeholder="street-num-city " />
+					<mat-error *ngIf="studentForm.get('address').invalid && studentForm.get('address').touched"> Address is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-      <mat-form-field class="student" appearance="standard">
-        <mat-label>Address </mat-label>
-        <input formControlName="address" matInput placeholder="street-num-city ">
-        <mat-error *ngIf="studentForm.get('address').invalid&&
-                          studentForm.get('address').touched">
-          Address is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+				<mat-form-field class="student" appearance="standard">
+					<mat-label>Email</mat-label>
+					<input formControlName="email" matInput [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com" />
+					<mat-error *ngIf="studentForm.get('email').hasError('email') && !studentForm.get('email').hasError('required')"> Please enter a valid email address </mat-error>
+					<mat-error *ngIf="studentForm.get('email').hasError('required')"> Email is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-      <mat-form-field class="student" appearance="standard">
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput [errorStateMatcher]="matcher" placeholder="Ex. pat@example.com">
-        <mat-error *ngIf="studentForm.get('email').hasError('email') && !studentForm.get('email').hasError('required')">
-          Please enter a valid email address
-        </mat-error>
-        <mat-error *ngIf="studentForm.get('email').hasError('required')">
-          Email is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
+				<div formGroupName="userForm">
+					<mat-form-field class="student" appearance="standard">
+						<mat-label>Username</mat-label>
+						<input #uname formControlName="username" matInput [errorStateMatcher]="matcher" placeholder="username" />
+						<mat-error *ngIf="studentForm.get('userForm').get('username').hasError('forbiddenName') && !studentForm.get('userForm').get('username').hasError('required')">
+							{{ uname.value }} Username not allowed
+						</mat-error>
+						<mat-error *ngIf="studentForm.get('userForm').get('username').hasError('required')"> Username is <strong>required</strong> </mat-error>
+					</mat-form-field>
 
-      <div formGroupName="userForm">
+					<mat-form-field class="student" appearance="standard">
+						<mat-label>Password</mat-label>
+						<input formControlName="password" matInput placeholder="pass-123" />
+						<mat-error *ngIf="studentForm.get('userForm').get('password').invalid && studentForm.get('userForm').get('password').touched">
+							Password is <strong>required</strong>
+						</mat-error>
+					</mat-form-field>
+				</div>
 
-        <mat-form-field class="student" appearance="standard">
-          <mat-label>Username</mat-label>
-          <input #uname formControlName="username" matInput [errorStateMatcher]="matcher" placeholder="username">
-          <mat-error *ngIf="studentForm.get('userForm').get('username').hasError('forbiddenName') && !studentForm.get('userForm').get('username').hasError('required')">
-            {{ uname.value}} Username not allowed
-          </mat-error>
-          <mat-error *ngIf="studentForm.get('userForm').get('username').hasError('required')">
-            Username is <strong>required</strong>
-          </mat-error>
-       
-        </mat-form-field>
-
-        <mat-form-field class="student" appearance="standard">
-          <mat-label>Password</mat-label>
-          <input formControlName="password" matInput placeholder="pass-123">
-          <mat-error *ngIf="studentForm.get('userForm').get('password').invalid &&
-          studentForm.get('userForm').get('password').touched">
-          Password is <strong>required</strong>
-        </mat-error>
-        </mat-form-field>
-
-      </div>
-
-      <div class="student" style="padding-bottom: 2em;">
-        <button [disabled]="!studentForm.valid" type="submit" mat-raised-button style="float: left;">Insert Student</button>
-        <button [disabled]="studentForm.value.id==null" type="button" (click)="onUpdate(studentForm.value)" mat-raised-button style="float: left;">Update Student</button>
-        <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
-        <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
-      </div>
-    </form>
-    {{studentForm.value | json}}
-  </mat-card-content>
-</mat-card>
+				<div class="student" style="padding-bottom: 2em">
+					<button [disabled]="!studentForm.valid" type="submit" mat-raised-button style="float: left">Insert Student</button>
+					<button [disabled]="studentForm.value.id == null" type="button" (click)="onUpdate(studentForm.value)" mat-raised-button style="float: left">Update Student</button>
+					<button type="button" mat-raised-button style="float: left" (click)="onClear()">Clear</button>
+					<button type="button" mat-raised-button style="float: right" (click)="onCancel()">Cancel</button>
+				</div>
+			</form>
+			{{ studentForm.value | json }}
+		</mat-card-content>
+	</mat-card>
 </div>
 
-<div *ngIf="showInsertStudentPayment" style="margin-top: 1.5em;" style="background: rgb(250, 206, 228);">
-  <h3 style="text-align: center;">Insert Student's Payment</h3>
-<mat-card style="margin: 1.5em;">
-  <mat-card-content style="background-color: rgb(233, 233, 233);">
-    <form  [formGroup]="paymentForm" (ngSubmit)="onSubmitPayment(paymentForm.value)" novalidate>
+<div *ngIf="showInsertStudentPayment" style="margin-top: 1.5em" style="background: rgb(250, 206, 228)">
+	<h3 style="text-align: center">Insert Student's Payment</h3>
+	<mat-card style="margin: 1.5em">
+		<mat-card-content style="background-color: rgb(233, 233, 233)">
+			<form [formGroup]="paymentForm" (ngSubmit)="onSubmitPayment(paymentForm.value)" novalidate>
+				<mat-label class="student">
+					<span> {{ selectedStudent.cardNumber }} </span>
+					<span class="demo-2"> -- {{ selectedStudent.firstName }} </span>
+					<span> {{ selectedStudent.lastName }} </span>
+				</mat-label>
 
-      <mat-label class="student">
-          <span> {{selectedStudent.cardNumber}} </span>
-          <span class="demo-2"> -- {{selectedStudent.firstName}} </span>
-          <span> {{selectedStudent.lastName}} </span>
-      </mat-label>
+				<mat-form-field class="student" appearance="standard">
+					<mat-label>Payment</mat-label>
+					<input formControlName="onePaymentChange" matInput placeholder="payment" />
+					<mat-error *ngIf="paymentForm.get('onePaymentChange').invalid && paymentForm.get('onePaymentChange').touched"> Payment is <strong>required</strong> </mat-error>
+				</mat-form-field>
 
-      <mat-form-field class="student" appearance="standard">
-        <mat-label >Payment</mat-label>
-        <input formControlName="onePaymentChange" matInput placeholder="payment">
-        <mat-error *ngIf="paymentForm.get('onePaymentChange').invalid&&
-        paymentForm.get('onePaymentChange').touched">
-          Payment is <strong>required</strong>
-        </mat-error>
-      </mat-form-field>
-
-      <div class="student" style="padding-bottom: 2em;">
-        <button [disabled]="!paymentForm.valid" type="submit" mat-raised-button style="float: left;">Insert Payment</button>
-        <button type="button" mat-raised-button style="float: left;" (click)="onClearPayment()">Clear</button>
-        <button type="button" mat-raised-button style="float: right;" (click)="onCancelPayment()">Cancel</button>
-      </div>
-    </form>
-  </mat-card-content>
-</mat-card>
+				<div class="student" style="padding-bottom: 2em">
+					<button [disabled]="!paymentForm.valid" type="submit" mat-raised-button style="float: left">Insert Payment</button>
+					<button type="button" mat-raised-button style="float: left" (click)="onClearPayment()">Clear</button>
+					<button type="button" mat-raised-button style="float: right" (click)="onCancelPayment()">Cancel</button>
+				</div>
+			</form>
+		</mat-card-content>
+	</mat-card>
 </div>

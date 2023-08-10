@@ -1,44 +1,41 @@
 <div class="mat-elevation-z8">
-    <h4 style="text-align: center;">List of Exams</h4>
-    <div class="row">
-      <div class="col-4" >
-        <mat-form-field style="margin-left: 0.8em;">
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
-        </mat-form-field>
-      </div>
-      <div class="col-8" style="float: right;"> 
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
-  
-    <table mat-table [dataSource]="dataSource" matSort >
+	<h4 style="text-align: center">List of Exams</h4>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-4">
+			<mat-form-field style="margin-left: 0.8em">
+				<mat-label>Search</mat-label>
+				<input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+			</mat-form-field>
+		</div>
+		<div class="col-8" style="float: right">
+			<mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-            <mat-header-cell *matHeaderCellDef> No </mat-header-cell>
-            <mat-cell *matCellDef="let examRegistration; let i = index"> {{i+1}} </mat-cell>
-            <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
-        </ng-container>
-  
-      <!-- Course Name Column -->
-      <ng-container matColumnDef="name">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Course Name </mat-header-cell>
-        <mat-cell *matCellDef="let examRegistration"> {{examRegistration.exam.course.name}} </mat-cell>
-        <mat-footer-cell *matFooterCellDef>  </mat-footer-cell>
-      </ng-container>
+	<table mat-table [dataSource]="dataSource" matSort>
+		<!-- Position Column -->
+		<ng-container matColumnDef="position">
+			<mat-header-cell *matHeaderCellDef> No </mat-header-cell>
+			<mat-cell *matCellDef="let examRegistration; let i = index"> {{ i + 1 }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+		</ng-container>
 
-       <!-- Mark Column -->
-       <ng-container matColumnDef="mark">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Mark </mat-header-cell>
-        <mat-cell *matCellDef="let examRegistration">{{examRegistration.mark}} </mat-cell>
-        <mat-footer-cell *matFooterCellDef> {{getAverageMark() | number: '.2-2'}} </mat-footer-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"  ></mat-row>
-      <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
-    </table>
+		<!-- Course Name Column -->
+		<ng-container matColumnDef="name">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Course Name </mat-header-cell>
+			<mat-cell *matCellDef="let examRegistration"> {{ examRegistration.exam.course.name }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+		</ng-container>
+
+		<!-- Mark Column -->
+		<ng-container matColumnDef="mark">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Mark </mat-header-cell>
+			<mat-cell *matCellDef="let examRegistration">{{ examRegistration.mark }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> {{ getAverageMark() | number : '.2-2' }} </mat-footer-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+		<mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+	</table>
 </div>
-
-

@@ -1,51 +1,48 @@
 <div class="mat-elevation-z8">
-    <h4 style="text-align: center;">List of Payments</h4>
-    <div class="row">
-      <div class="col-4" >
-        <mat-form-field style="margin-left: 0.8em;">
-          <mat-label>Search</mat-label>
-          <input matInput (keyup)="applyFilter($event)" placeholder="Search">
-        </mat-form-field>
-      </div>
-      <div class="col-8" style="float: right;"> 
-        <mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
-      </div>
-    </div>
-  
-    <table mat-table [dataSource]="dataSource" matSort >
+	<h4 style="text-align: center">List of Payments</h4>
+	<div class="" style="display: flex; flex-direction: row">
+		<div class="col-4">
+			<mat-form-field style="margin-left: 0.8em">
+				<mat-label>Search</mat-label>
+				<input matInput (keyup)="applyFilter($event)" placeholder="Search" />
+			</mat-form-field>
+		</div>
+		<div class="col-8" style="float: right">
+			<mat-paginator [pageSizeOptions]="[10, 15, 20]" showFirstLastButtons></mat-paginator>
+		</div>
+	</div>
 
-        <!-- Position Column -->
-        <ng-container matColumnDef="position">
-            <mat-header-cell *matHeaderCellDef> No </mat-header-cell>
-            <mat-cell *matCellDef="let payment; let i = index"> {{i+1}} </mat-cell>
-            <mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
-        </ng-container>
-  
-      <!-- Time Column -->
-      <ng-container matColumnDef="date">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Payment Time </mat-header-cell>
-        <mat-cell *matCellDef="let payment"> {{payment.paymentTime|date:'medium'}} </mat-cell>
-        <mat-footer-cell *matFooterCellDef>  </mat-footer-cell>
-      </ng-container>
+	<table mat-table [dataSource]="dataSource" matSort>
+		<!-- Position Column -->
+		<ng-container matColumnDef="position">
+			<mat-header-cell *matHeaderCellDef> No </mat-header-cell>
+			<mat-cell *matCellDef="let payment; let i = index"> {{ i + 1 }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> Total </mat-footer-cell>
+		</ng-container>
 
-       <!-- Reason Column -->
-       <ng-container matColumnDef="reason">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Reason </mat-header-cell>
-        <mat-cell *matCellDef="let payment"> {{payment.reason}} </mat-cell>
-        <mat-footer-cell *matFooterCellDef>  </mat-footer-cell>
-      </ng-container>
+		<!-- Time Column -->
+		<ng-container matColumnDef="date">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Payment Time </mat-header-cell>
+			<mat-cell *matCellDef="let payment"> {{ payment.paymentTime | date : 'medium' }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+		</ng-container>
 
-       <!-- OnePaymentChange Column -->
-       <ng-container matColumnDef="onePaymentChange">
-        <mat-header-cell *matHeaderCellDef mat-sort-header> Changes </mat-header-cell>
-        <mat-cell *matCellDef="let payment">{{payment.onePaymentChange}} </mat-cell>
-        <mat-footer-cell *matFooterCellDef> {{getTotal() | number: '.2-2'}} </mat-footer-cell>
-      </ng-container>
-  
-      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"  ></mat-row>
-      <mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
-    </table>
+		<!-- Reason Column -->
+		<ng-container matColumnDef="reason">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Reason </mat-header-cell>
+			<mat-cell *matCellDef="let payment"> {{ payment.reason }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> </mat-footer-cell>
+		</ng-container>
+
+		<!-- OnePaymentChange Column -->
+		<ng-container matColumnDef="onePaymentChange">
+			<mat-header-cell *matHeaderCellDef mat-sort-header> Changes </mat-header-cell>
+			<mat-cell *matCellDef="let payment">{{ payment.onePaymentChange }} </mat-cell>
+			<mat-footer-cell *matFooterCellDef> {{ getTotal() | number : '.2-2' }} </mat-footer-cell>
+		</ng-container>
+
+		<mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+		<mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+		<mat-footer-row *matFooterRowDef="displayedColumns"></mat-footer-row>
+	</table>
 </div>
-
-

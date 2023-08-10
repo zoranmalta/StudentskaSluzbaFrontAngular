@@ -1,21 +1,22 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+	selector: 'app-navbar',
+	templateUrl: './navbar.component.html',
+	styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
+	@Output() logoutEvent: EventEmitter<any> = new EventEmitter<any>();
+	@Input() loggedIn: boolean;
+	@Input() loggedUser: any;
 
-  @Output() logoutEvent: EventEmitter<any> = new EventEmitter<any>();
-  @Input() loggedIn: boolean;
+	constructor() {}
 
-  constructor() { }
+	ngOnInit(): void {
+		console.log('loggedUser  ', this.loggedUser);
+	}
 
-  ngOnInit(): void {
-  }
-
-  logout(){
-    this.logoutEvent.emit();
-  }
+	logout() {
+		this.logoutEvent.emit();
+	}
 }

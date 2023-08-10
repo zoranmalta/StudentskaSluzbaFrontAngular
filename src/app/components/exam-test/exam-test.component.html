@@ -1,106 +1,87 @@
-<div class="row">
-  <div class="col-10">
-    <ng-container *ngIf="infinite | async as questions; else loading" >
-    
-      <div  style="padding-top: 4px;">
-          <cdk-virtual-scroll-viewport  itemSize="220" 
-              (scrolledIndexChange)="nextBatch($event,questions)" >
-      
-          <mat-card class="example-card" *cdkVirtualFor="let question of questions; let i=index; trackBy: trackByIdx">
-          <mat-card-header>
-            <!-- <div mat-card-avatar class="example-header-image"></div> -->
-            <mat-card-title > {{i+1+". " }} {{question.pitanje | decodeHtmlString}} </mat-card-title>
-            <!-- <mat-card-subtitle> {{question.opis | decodeHtmlString}} </mat-card-subtitle> -->
-          </mat-card-header>
-          
-          <mat-card-content *ngIf="question.prikaziOpis">
-            <p>{{question.opis}}  adsfaf asdfasdf&#xB2;asdfasd &sup2;  &#178;</p>
-          </mat-card-content>
-          <mat-card-actions>
-              <div class="row card-container"  >
-                  <div class="col-1 " >
-                    
-                  </div>
-                  <div [ngClass]="{'col-5':true,'card':true,'blue':true,'green': question.datTacanOdgovor1,'red': question.datNetacanOdgovor1,'disableDiv': question.prikaziOpis}"  (click)="odgovorNaPitanje1(question,i)" >
-                       {{question.prikaz1}} 
-                  </div>
-                  <div [ngClass]="{'col-5':true,'card':true,'blue':true,'green': question.datTacanOdgovor2,'red': question.datNetacanOdgovor2,'disableDiv': question.prikaziOpis}"  (click)="odgovorNaPitanje2(question,i)">
-                      {{question.prikaz2}}
-                  </div>
-                  <div class="col-1 ">
-                   
-                  </div>
-                </div>
-      
-                <div class="row card-container">
-                  <div class="col-1" >
-                   
-                  </div>
-                  <div [ngClass]="{'col-5':true,'card':true,'blue':true,'green': question.datTacanOdgovor3,'red': question.datNetacanOdgovor3,'disableDiv': question.prikaziOpis}"  (click)="odgovorNaPitanje3(question,i)">
-                      {{question.prikaz3}}
-                  </div>
-                  <div [ngClass]="{'col-5':true,'card':true,'blue':true,'green': question.datTacanOdgovor4,'red': question.datNetacanOdgovor4,'disableDiv': question.prikaziOpis}"  (click)="odgovorNaPitanje4(question,i)">
-                      {{question.prikaz4}}
-                  </div>
-                  <div class="col-1 ">
-                   
-                  </div>
-                </div>
-      
-              </mat-card-actions>
-              <mat-card-footer *ngIf="false">
-                  futer tekst
-              </mat-card-footer>
-          </mat-card>
-          </cdk-virtual-scroll-viewport>
-        </div>
-      </ng-container>
-      <ng-template #loading >
-          Ucitavanje pitanja ...
-      </ng-template>
-  </div >
-  <div class="col-2 ">
+<div class="" style="display: flex; flex-direction: row">
+	<div class="col-10">
+		<ng-container *ngIf="infinite | async as questions; else loading">
+			<div style="padding-top: 4px">
+				<cdk-virtual-scroll-viewport itemSize="220" (scrolledIndexChange)="nextBatch($event, questions)">
+					<mat-card class="example-card" *cdkVirtualFor="let question of questions; let i = index; trackBy: trackByIdx">
+						<mat-card-header>
+							<!-- <div mat-card-avatar class="example-header-image"></div> -->
+							<mat-card-title> {{ i + 1 + '. ' }} {{ question.pitanje | decodeHtmlString }} </mat-card-title>
+							<!-- <mat-card-subtitle> {{question.opis | decodeHtmlString}} </mat-card-subtitle> -->
+						</mat-card-header>
 
-    <div class="row time" id="counter" >
-      0
-    </div>
+						<mat-card-content *ngIf="question.prikaziOpis">
+							<p>{{ question.opis }} adsfaf asdfasdf&#xB2;asdfasd &sup2; &#178;</p>
+						</mat-card-content>
+						<mat-card-actions>
+							<div class="row card-container">
+								<div class="col-1"></div>
+								<div
+									[ngClass]="{ 'col-5': true, card: true, blue: true, green: question.datTacanOdgovor1, red: question.datNetacanOdgovor1, disableDiv: question.prikaziOpis }"
+									(click)="odgovorNaPitanje1(question, i)"
+								>
+									{{ question.prikaz1 }}
+								</div>
+								<div
+									[ngClass]="{ 'col-5': true, card: true, blue: true, green: question.datTacanOdgovor2, red: question.datNetacanOdgovor2, disableDiv: question.prikaziOpis }"
+									(click)="odgovorNaPitanje2(question, i)"
+								>
+									{{ question.prikaz2 }}
+								</div>
+								<div class="col-1"></div>
+							</div>
 
-    <div class="row time">
-      <h3>Preostalo vreme</h3>
-    </div>
+							<div class="row card-container">
+								<div class="col-1"></div>
+								<div
+									[ngClass]="{ 'col-5': true, card: true, blue: true, green: question.datTacanOdgovor3, red: question.datNetacanOdgovor3, disableDiv: question.prikaziOpis }"
+									(click)="odgovorNaPitanje3(question, i)"
+								>
+									{{ question.prikaz3 }}
+								</div>
+								<div
+									[ngClass]="{ 'col-5': true, card: true, blue: true, green: question.datTacanOdgovor4, red: question.datNetacanOdgovor4, disableDiv: question.prikaziOpis }"
+									(click)="odgovorNaPitanje4(question, i)"
+								>
+									{{ question.prikaz4 }}
+								</div>
+								<div class="col-1"></div>
+							</div>
+						</mat-card-actions>
+						<mat-card-footer *ngIf="false"> futer tekst </mat-card-footer>
+					</mat-card>
+				</cdk-virtual-scroll-viewport>
+			</div>
+		</ng-container>
+		<ng-template #loading> Ucitavanje pitanja ... </ng-template>
+	</div>
+	<div class="col-2">
+		<div class="row time" id="counter">0</div>
 
-    <div class="row time">
-      {{counter}} / {{questionsAll.length}}
-    </div>
+		<div class="row time">
+			<h3>Preostalo vreme</h3>
+		</div>
 
-    <div class="row time">
-      <h3>Uradjena pitanja</h3>
-    </div>
+		<div class="row time">{{ counter }} / {{ questionsAll.length }}</div>
 
-    <div class="row time">
-      {{tacniOdgovori}} / {{counter}}
-    </div>
+		<div class="row time">
+			<h3>Uradjena pitanja</h3>
+		</div>
 
-    <div class="row time">
-      <h3>Procenat tačnosti</h3>
-    </div>
+		<div class="row time">{{ tacniOdgovori }} / {{ counter }}</div>
 
-    <div class="row time">
-      {{workTest.bodovi}} / {{examTest.bodovi}}
-    </div>
+		<div class="row time">
+			<h3>Procenat tačnosti</h3>
+		</div>
 
-    <div class="row time">
-      <h3>Procenat bodova</h3>
-    </div>
+		<div class="row time">{{ workTest.bodovi }} / {{ examTest.bodovi }}</div>
 
-    <div class="row card-container">
-      <div class="card green" (click)="zavrsiTest()">
-        Završi test
-      </div>
-    </div>
+		<div class="row time">
+			<h3>Procenat bodova</h3>
+		</div>
 
-  </div>
-
+		<div class="row card-container">
+			<div class="card green" (click)="zavrsiTest()">Završi test</div>
+		</div>
+	</div>
 </div>
-
-

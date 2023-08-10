@@ -1,25 +1,23 @@
+<div class="">
+	<!-- If not logged in: -->
+	<!-- <div *ngIf="loggedIn; else notLoggedInTemplate"> -->
+	<!--If logged in: -->
+	<app-navbar [loggedIn]="loggedIn" (logoutEvent)="logout()" [loggedUser]="getCurrentUser()"></app-navbar>
+	<div class="page-container">
+		<div class="side-bar-container">
+			<h2 style="text-align: center; margin-top: 10px; background-color: rgb(72, 78, 84); color: white">Glavni meni</h2>
+			<router-outlet name="sidemenu"></router-outlet>
+		</div>
+		<div class="main-screen-container">
+			<router-outlet></router-outlet>
+		</div>
+	</div>
+	<!-- </div> -->
 
-<div class="container-fluid">
-  <!-- If not logged in: -->
-  <!-- <div *ngIf="loggedIn; else notLoggedInTemplate"> -->
-    <!--If logged in: -->
-    <app-navbar [loggedIn]="loggedIn" (logoutEvent)="logout()"></app-navbar>
-    <div class="row">
-      <div class="col-10" >
-        <router-outlet></router-outlet>
-      </div>
-      <div class="col-2">
-        <h3 style="text-align: center;">Main menu</h3>
-        <router-outlet name="sidemenu"></router-outlet>
-      </div>
-    </div>
-  <!-- </div> -->
-
-  <!-- <ng-template #notLoggedInTemplate>
+	<!-- <ng-template #notLoggedInTemplate>
    
           <app-login (childEvent)="loggedIn=$event"></app-login>
        
     
   </ng-template> -->
-
 </div>

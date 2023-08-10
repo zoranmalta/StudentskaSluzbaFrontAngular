@@ -1,141 +1,105 @@
-<div class="row">
-    <div class="col-6">
-        <div  style="background: rgb(250, 206, 228);">
-            <h2 style="text-align: center;">Unesi Pitanje</h2>
-          <mat-card style="margin: 0.8em;">
-            <mat-card-content >
-               <form  [formGroup]="pitanjeForm" (ngSubmit)="onSubmitPitanje(pitanjeForm)" novalidate>
-                
-                <mat-form-field class="student" appearance="standard">
-                  <mat-label>Pitanje</mat-label>
-                  <textarea formControlName="pitanje" matInput placeholder="pitanje"></textarea>
-                  <mat-error *ngIf="pitanjeForm.get('pitanje').invalid&&
-                                    pitanjeForm.get('pitanje').touched">
-                    Pitanje je<strong>neophodno</strong>
-                  </mat-error>
-                </mat-form-field>
-          
-                <mat-form-field class="student" appearance="standard">
-                  <mat-label>Odgovor1 (Tacan odgovor)</mat-label>
-                  <input formControlName="odgovor1" matInput placeholder="odgovor1" autocomplete="off">
-                  <mat-error *ngIf="pitanjeForm.get('odgovor1').invalid&&
-                                    pitanjeForm.get('odgovor1').touched">
-                    Odgovor1 je<strong>neophodan</strong>
-                  </mat-error>
-                </mat-form-field>
-        
-                <mat-form-field class="student" appearance="standard">
-                    <mat-label>Odgovor2</mat-label>
-                    <input formControlName="odgovor2" matInput placeholder="odgovor2" autocomplete="off">
-                    <mat-error *ngIf="pitanjeForm.get('odgovor2').invalid&&
-                                      pitanjeForm.get('odgovor2').touched">
-                      Odgovor2 je<strong>neophodan</strong>
-                    </mat-error>
-                </mat-form-field>
-        
-                <mat-form-field class="student" appearance="standard">
-                    <mat-label>Odgovor3</mat-label>
-                    <input formControlName="odgovor3" matInput placeholder="odgovor3" autocomplete="off">
-                    <mat-error *ngIf="pitanjeForm.get('odgovor3').invalid&&
-                                      pitanjeForm.get('odgovor3').touched">
-                      Odgovor3 je<strong>neophodan</strong>
-                    </mat-error>
-                </mat-form-field>  
-        
-                <mat-form-field class="student" appearance="standard">
-                    <mat-label>Odgovor4</mat-label>
-                    <input formControlName="odgovor4" matInput placeholder="odgovor4" autocomplete="off">
-                    <mat-error *ngIf="pitanjeForm.get('odgovor4').invalid&&
-                                      pitanjeForm.get('odgovor4').touched">
-                      Odgovor4 je<strong>neophodan</strong>
-                    </mat-error>
-                </mat-form-field>
-          
-                <mat-form-field class="student" appearance="standard">
-                  <mat-label>Opis </mat-label>
-                  <input formControlName="opis" matInput placeholder="opis " autocomplete="off">
-                  <mat-error *ngIf="pitanjeForm.get('opis').invalid&&
-                                    pitanjeForm.get('opis').touched">
-                    Opis je <strong>neophodan</strong>
-                  </mat-error>
-                </mat-form-field>
+<div class="" style="background-color: #e0e0e0; display: flex; flex-direction: row">
+	<div class="col-6">
+		<div style="padding: 30px 0px; height: calc(100vh - 54px)">
+			<h2 style="text-align: center">Unesi Pitanje</h2>
+			<mat-card style="margin: 0.8em; background: rgb(250, 248, 249)">
+				<mat-card-content style="margin: 0.8em; background: rgb(250, 248, 249)">
+					<form [formGroup]="pitanjeForm" (ngSubmit)="onSubmitPitanje(pitanjeForm)" novalidate>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Pitanje</mat-label>
+							<textarea formControlName="pitanje" matInput placeholder="pitanje"></textarea>
+							<mat-error *ngIf="pitanjeForm.get('pitanje').invalid && pitanjeForm.get('pitanje').touched"> Pitanje je<strong>neophodno</strong> </mat-error>
+						</mat-form-field>
 
-                <mat-form-field class="student" appearance="standard">
-                  <mat-label >Bodovi</mat-label>
-                  <input formControlName="bodovi" matInput placeholder="bodovi" autocomplete="off">
-                  <mat-error *ngIf="pitanjeForm.get('bodovi').invalid&&
-                                    pitanjeForm.get('bodovi').touched">
-                  Bodovi su <strong>obavezni</strong>
-                  </mat-error>
-                </mat-form-field>
-               
-                <div class="action">
-                  <button [disabled]="!pitanjeForm.valid" type="submit" mat-raised-button class="buttonSubmit">Unesi Pitanje</button>
-                  <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
-                  <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
-                </div>
-              </form> 
-             
-               </mat-card-content>
-            </mat-card>
-        </div>
-    </div>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Odgovor1 (Tacan odgovor)</mat-label>
+							<input formControlName="odgovor1" matInput placeholder="odgovor1" autocomplete="off" />
+							<mat-error *ngIf="pitanjeForm.get('odgovor1').invalid && pitanjeForm.get('odgovor1').touched"> Odgovor1 je<strong>neophodan</strong> </mat-error>
+						</mat-form-field>
 
-    <div class="col-6">
-        
-        <div  style="background: rgb(250, 206, 228); min-height: 100vh;">
-            <h2 style="text-align: center;">Popuni zahteve za test</h2>
-            <mat-card style="margin: 0.8em;">
-                <mat-card-content >
-                  <form  [formGroup]="examTestForm" (ngSubmit)="onSubmitTest(examTestForm.value)" novalidate>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Odgovor2</mat-label>
+							<input formControlName="odgovor2" matInput placeholder="odgovor2" autocomplete="off" />
+							<mat-error *ngIf="pitanjeForm.get('odgovor2').invalid && pitanjeForm.get('odgovor2').touched"> Odgovor2 je<strong>neophodan</strong> </mat-error>
+						</mat-form-field>
 
-                    <mat-form-field class="student" appearance="standard">
-                      <mat-label >Tema</mat-label>
-                      <input formControlName="tema" matInput placeholder="tema" autocomplete="off">
-                      <mat-error *ngIf="examTestForm.get('tema').invalid&&
-                      examTestForm.get('tema').touched">
-                      Tema je <strong>obavezna</strong>
-                      </mat-error>
-                    </mat-form-field>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Odgovor3</mat-label>
+							<input formControlName="odgovor3" matInput placeholder="odgovor3" autocomplete="off" />
+							<mat-error *ngIf="pitanjeForm.get('odgovor3').invalid && pitanjeForm.get('odgovor3').touched"> Odgovor3 je<strong>neophodan</strong> </mat-error>
+						</mat-form-field>
 
-                    <mat-form-field class="student" appearance="standard">
-                        <mat-label >Trajanje Testa (Minuti)</mat-label>
-                        <input formControlName="trajanje" matInput placeholder="trajanje" autocomplete="off">
-                        <mat-error *ngIf="examTestForm.get('trajanje').invalid&&
-                        examTestForm.get('trajanje').touched">
-                          Trajanje je <strong>obavezno</strong>
-                        </mat-error>
-                      </mat-form-field>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Odgovor4</mat-label>
+							<input formControlName="odgovor4" matInput placeholder="odgovor4" autocomplete="off" />
+							<mat-error *ngIf="pitanjeForm.get('odgovor4').invalid && pitanjeForm.get('odgovor4').touched"> Odgovor4 je<strong>neophodan</strong> </mat-error>
+						</mat-form-field>
 
-                    <mat-form-field class="student" appearance="standard">
-                      <mat-label>Izaberi datum i vreme testa</mat-label>
-                      <input formControlName="testStart" matInput placeholder="test start" autocomplete="off"
-                                               [owlDateTime]="dt" [owlDateTimeTrigger]="dt">
-                                               <owl-date-time #dt></owl-date-time>
-                      <mat-error *ngIf="examTestForm.get('testStart').invalid&&
-                      examTestForm.get('testStart').touched">
-                        Test Start je <strong>obavezan</strong>
-                      </mat-error>
-                    </mat-form-field>
-              
-                    <div class="action" >
-                      <button [disabled]="!examTestForm.valid" type="submit" mat-raised-button class="buttonSubmit">Ucitaj Test</button>
-                      <button type="button" mat-raised-button style="float: left;" (click)="onClear()">Clear</button>
-                      <button type="button" mat-raised-button style="float: right;" (click)="onCancel()">Cancel</button>
-                    </div>
-                  </form>
-                </mat-card-content>
-              </mat-card>
-              <h3 style="text-align: center;">Lista pitanja</h3>
-            <mat-list >
-                <mat-list-item *ngFor="let question of questionList; let i=index; trackBy: trackByIdx">
-                    <div mat-line>{{i+1 }} <span> {{question.pitanje }} </span></div>
-                    <button mat-raised-button (click)="izbaci(question)" style="background-color: rgb(241, 150, 150);" > Izbaci </button>
-                    
-                </mat-list-item>
-            </mat-list>
-              
-        </div>
-    </div>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Opis </mat-label>
+							<input formControlName="opis" matInput placeholder="opis " autocomplete="off" />
+							<mat-error *ngIf="pitanjeForm.get('opis').invalid && pitanjeForm.get('opis').touched"> Opis je <strong>neophodan</strong> </mat-error>
+						</mat-form-field>
+
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Bodovi</mat-label>
+							<input formControlName="bodovi" matInput placeholder="bodovi" autocomplete="off" />
+							<mat-error *ngIf="pitanjeForm.get('bodovi').invalid && pitanjeForm.get('bodovi').touched"> Bodovi su <strong>obavezni</strong> </mat-error>
+						</mat-form-field>
+
+						<div class="action" style="margin-top: 30px; background: rgb(250, 248, 249)">
+							<button [disabled]="!pitanjeForm.valid" type="submit" mat-raised-button class="buttonSubmit">Unesi Pitanje</button>
+							<button type="button" mat-raised-button style="float: left" (click)="onClear()">Clear</button>
+							<button type="button" mat-raised-button style="float: right" (click)="onCancel()">Cancel</button>
+						</div>
+					</form>
+				</mat-card-content>
+			</mat-card>
+		</div>
+	</div>
+
+	<div class="col-6">
+		<div style="padding: 30px 0px; height: calc(100vh - 54px)">
+			<h2 style="text-align: center">Popuni zahteve za test</h2>
+			<mat-card style="margin: 0.8em; background: rgb(250, 248, 249)">
+				<mat-card-content style="margin: 0.8em; background: rgb(250, 248, 249)">
+					<form [formGroup]="examTestForm" (ngSubmit)="onSubmitTest(examTestForm.value)" novalidate>
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Tema</mat-label>
+							<input formControlName="tema" matInput placeholder="tema" autocomplete="off" />
+							<mat-error *ngIf="examTestForm.get('tema').invalid && examTestForm.get('tema').touched"> Tema je <strong>obavezna</strong> </mat-error>
+						</mat-form-field>
+
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Trajanje Testa (Minuti)</mat-label>
+							<input formControlName="trajanje" matInput placeholder="trajanje" autocomplete="off" />
+							<mat-error *ngIf="examTestForm.get('trajanje').invalid && examTestForm.get('trajanje').touched"> Trajanje je <strong>obavezno</strong> </mat-error>
+						</mat-form-field>
+
+						<mat-form-field class="student" appearance="standard">
+							<mat-label>Izaberi datum i vreme testa</mat-label>
+							<input formControlName="testStart" matInput placeholder="test start" autocomplete="off" [owlDateTime]="dt" [owlDateTimeTrigger]="dt" />
+							<owl-date-time #dt></owl-date-time>
+							<mat-error *ngIf="examTestForm.get('testStart').invalid && examTestForm.get('testStart').touched"> Test Start je <strong>obavezan</strong> </mat-error>
+						</mat-form-field>
+
+						<div class="action" style="margin-top: 30px; background: rgb(250, 248, 249)">
+							<button [disabled]="!examTestForm.valid" type="submit" mat-raised-button class="buttonSubmit">Ucitaj Test</button>
+							<button type="button" mat-raised-button style="float: left" (click)="onClear()">Clear</button>
+							<button type="button" mat-raised-button style="float: right" (click)="onCancel()">Cancel</button>
+						</div>
+					</form>
+				</mat-card-content>
+			</mat-card>
+			<h3 style="text-align: center">Lista pitanja</h3>
+			<mat-list>
+				<mat-list-item *ngFor="let question of questionList; let i = index; trackBy: trackByIdx">
+					<div mat-line>
+						{{ i + 1 }}.<span> {{ question.pitanje }} </span>
+					</div>
+					<button mat-raised-button (click)="izbaci(question)" style="background-color: rgb(241, 150, 150); width: 170px">Ukloni pitanje</button>
+				</mat-list-item>
+			</mat-list>
+		</div>
+	</div>
 </div>
-
